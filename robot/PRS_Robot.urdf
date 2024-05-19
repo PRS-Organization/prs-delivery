@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<robot name="Xbot">
+
+  <!-- body link -->
+  <link name="link_body">
+  	<visual>
+      <origin xyz="0 0 0.0376" rpy="0 0 0"/>
+      <geometry>
+		<box size="1.2 0.2 0.0752" />
+      </geometry>
+      <material name="black">
+      	<color rgba="0.0 0.0 0.0 0.2" />
+      </material>
+    </visual>
+  </link>
+
+  <!-- base link -->
+  <link name="base_link">
+  	<visual>
+      <origin xyz="0 0 0.0539" rpy="0 0 0"/>
+      <geometry>
+		<box size="0.2 0.2 0.1078" />
+      </geometry>
+    </visual>
+  </link>
+
+    <joint name="joint_base" type="prismatic">
+        <origin xyz="0 0 0.0752" rpy="0 0 0"></origin>
+        <parent link="link_body" />
+        <child link="base_link"/>
+        <axis xyz="1 0 0" />
+        <limit effort="30" velocity="1.0" lower="-0.5" upper="0.5" />
+    </joint>
+
+
+  <!-- shoulder link -->
+  <link name="shoulder_link">
+  	<visual>
+      <origin xyz="0 0 0.04" rpy="0 0 0"/>
+      <geometry>
+		<cylinder length="0.08" radius="0.07"/>
+      </geometry>
+      <material name="black">
+      	<color rgba="0.0 0.0 0.0 0.5" />
+      </material>
+    </visual>
+  </link>
+
+  <!-- shoulder joint -->
+    <joint name="shoulder_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="shoulder_link" />
+        <origin xyz="0 0 0.1078" />
+        <axis xyz="0 0 1"/>
+        <!--shoulder_link_z  -->
+    </joint>
+
+    <!-- link_big -->
+    <link name="link_big">
+        <visual>
+            <origin xyz="0 0 0.153" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.306" radius="0.04"/>
+            </geometry>
+            <material name="red">
+                <color rgba="1.0 0 0 0.6"/>
+            </material>
+        </visual>
+    </link>
+
+    <!-- joint_big -->
+    <joint name="joint_big" type="revolute">
+        <origin xyz="0 0 0.08" rpy="0 0 0"/>
+        <parent link="shoulder_link" />
+        <child link="link_big"/>
+         <axis xyz="0 1 0" />
+        <limit effort="30" velocity="1.7" lower="-0.5" upper="1.4" />
+    </joint>
+
+        <!-- link_small -->
+    <link name="link_small">
+        <visual>
+            <origin xyz="0 0 0.13375" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.2675" radius="0.04"/>
+            </geometry>
+            <material name="red">
+                <color rgba="0 0 1.0 0.5"/>
+            </material>
+        </visual>
+    </link>
+
+    <!-- joint_small -->
+    <joint name="joint_small" type="revolute">
+        <origin xyz="0 0 0.306" rpy="0 0 0"/>
+        <parent link="link_big" />
+        <child link="link_small"/>
+         <axis xyz="0 1 0" />
+        <limit effort="30" velocity="2.0" lower="-0.0" upper="1.7" />
+    </joint>
+
+    <!-- link_hand - change here to change the end effector-->
+    <link name="link_hand">
+        <visual>
+            <origin xyz="0 0 0.0969" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.05 0.05 0.1938" />
+            </geometry>
+            <material name="red">
+                <color rgba="1.0 0 0 0.8"/>
+            </material>
+        </visual>
+    </link>
+
+    <!-- joint_hand -->
+    <joint name="joint_hand" type="revolute">
+        <origin xyz="0 0 0.2675" rpy="0 0 0"/>
+        <parent link="link_small" />
+        <child link="link_hand"/>
+        <axis xyz="0 1 0" />
+        <limit effort="30" velocity="1.6" lower="-1.6" upper="1.6" />
+
+    </joint>
+
+    <!-- link_end -->
+    <link name="link_end">
+        <visual>
+            <origin xyz="0 0 0.01" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.02 0.02 0.05" />
+            </geometry>
+            <material name="red">
+                <color rgba="1.0 0 0 0.8"/>
+            </material>
+        </visual>
+    </link>
+
+    <!-- joint_end - change here to change the end effector -->
+    <joint name="joint_end" type="fixed">
+        <origin xyz="0 0 0.1938" rpy="0 0 0"/>
+        <parent link="link_hand" />
+        <child link="link_end"/>
+
+    </joint>
+
+</robot>
