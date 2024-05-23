@@ -18,6 +18,7 @@ from math import pi
 from spatialmath import SE3
 from spatialmath.base import *
 from collections import Counter
+from datetime import datetime
 
 def random_number(n):
     selected_number = np.random.randint(0, n)  # Generate a random number within the interval [0, n-1]
@@ -29,38 +30,6 @@ class Env(object):
         self.height_f2 = -5.2174
         self.height_f3 = -0.0499999
         f1, f2, f3 = self.height_f1, self.height_f2, self.height_f3
-        self.landmark = {
-            'warehouse': [(11.41, f1, -6.26, 'doorway'), (11.5, f1, -54, 'center')],
-            'laboratory': [(5.02, f2, 1.52, 'doorway'), (16.17, f2, 6.82, 'center')],
-            'clinic': [(-4.90, f2, -1.01, 'doorway'), (-3.14, f2, -5.02, 'center')],
-            'meeting room': [(4.83, f3, -2.13, 'doorway'), (2, f3, -4.04, 'center')],
-            'office': [(5.16, f3, 1.39, 'doorway'),(3.92, f3, 6.4, 'sit'), (7.43, f3, 7.35, 'center'), (8.7, f3, 6.3, 'center'), (4.83, f3, 3.11, 'center')],
-            'kitchen': [(-15.44, f3, -1.81, 'doorway'), (-18.3, f3, -5.9, 'free'), (-14.77, f3, -7.07, 'center')],
-            'restroom': [(-4.9, f3, 1.39, 'doorway'), (-7.08, f3, 8.01, 'center')],
-            'bedroom': [(19.88, f2, -1.2, 'gate'), (13.4, f3, -22.74, 'center'), (17.68, f3, -22.03, 'doorway'), (11.73, f3, -21.04, 'center')],
-            'lobby': [(23.94, f3, 3.1, 'doorway'), (23.12, f3, 7.19, 'center')],
-            'mark': [(19.61, f3, -0.35, '0'), (15.5, f3, -4.55, 1), (19.61, f3, -9.47, '2')],
-            'hallway': [(19.61, f3, -0.35, 'none'), (18.1, f3, 0.0, 'center')],
-            'hall': [(19.61, f3, -0.35, 'none'), (24.1, f3, -4.9, 'center')],
-            'wc': [(19.61, f3, -0.35, 'none'), (-12.9, f3, 2.1, 'center')],
-            'elevator': [(19.61, f3, -0.35, 'none'), (27.5, f3, -0.8, 'center')]
-        }
-        self.landmark_list = [
-            'warehouse',
-            'laboratory',
-            'clinic',
-            'meeting room',
-            'office',
-            'kitchen',
-            'restroom',
-            'bedroom',
-            'lobby',
-            'mark',
-            'hallway',
-            'hall',
-            'wc',
-            'elevator'
-        ]
         self.location = {
             "F1_EnergyRoom": [(21.65, -16.4, -24.8), (11.5, -16.4, -36.5)],
             "F1_ConveyorRoom": [(-0.4, -16.4, -2.8), (9.1, -16.4, -2.9)],
@@ -177,12 +146,14 @@ class Npc(object):
         self.person_id = n
 
     def go_to_here(self, pos, command=0):
+        try:
+            y = pos[1]
+        except:
+            pos = [pos['x'], pos['y'], pos['z']]
         person_id = self.person_id
         if not command:
             command = {"requestIndex": 10, "npcId": 0, "actionId": 1, "actionPara": {"destination": {"x": 0.5, "y": 1.0, "z": 0}}}
         command['npcId'] = person_id
-        # print(command)
-        # print(type(command['actionPara']))
         command['actionPara']['destination']['x'] = pos[0]
         command['actionPara']['destination']['y'] = pos[1]
         command['actionPara']['destination']['z'] = pos[2]
@@ -210,8 +181,7 @@ class Npc(object):
                 except Exception as e:
                     print(e, info)
                     # return False, info
-            # else:
-        return False, info
+        return None, info
 
     def query_information(self):
         pos, info = self.where_npc()
@@ -221,7 +191,7 @@ class Npc(object):
             obj_closed = datas['closeRangeItemIds']
         return pos, datas
 
-    def goto_randomly(self, position_tar, radius=1.5, delete_dis=3, times=10):
+    def goto_randomly(self, position_tar, radius=1.5, delete_dis=2, times=10):
         try:
             xx, yy, zz = position_tar[0], position_tar[1], position_tar[2]
         except:
@@ -267,7 +237,7 @@ class Npc(object):
                         if dis < 1:
                             result_go = 1
                             break
-                time.sleep(1.5)
+                time.sleep(1)
             if result_go == 0:
                 # Reverse loop deletion of points with a distance of 2 (not meter)
                 for i in range(len(point_list) - 1, -1, -1):
@@ -281,13 +251,6 @@ class Npc(object):
             # print('$$$$$not arrive: ', position_tar)
         return result_go
 
-    def go_to_place(self, tar, specific=1, rad=2, del_d=2, times=20):
-        destination = self.env.landmark[tar][specific]
-        print('^^^^^^^^^^^^ here will be ', destination)
-        result = 0
-        result = self.goto_randomly(destination, rad, del_d, times)
-        return result
-
     def random_walk(self):
         for i in range(1000):
             if not self.server.state or self.server.stop_event.is_set() or not self.running:
@@ -300,39 +263,11 @@ class Npc(object):
                 if res:
                     suc = self.npc_action('sit', obj)
                     if suc:
-                        time.sleep(10)
+                        time.sleep(30)
                         self.npc_action('stand')
                         time.sleep(3)
                     else:
                         time.sleep(5)
-
-    def walk_around(self):
-        time.sleep(1)
-        for i in range(1000):
-            if not self.server.state or self.server.stop_event.is_set() or not self.running:
-                return 0
-            if i < 3 and False:
-                continue
-            n = random_number(13)
-            # n = i
-            time.sleep(3)
-            # print('############### now go to {} -'.format(self.env.landmark_list[n]), i)
-            destination = self.env.landmark[self.env.landmark_list[n]][1]
-            print(n, destination)
-            go_res = self.go_to_place(self.env.landmark_list[n], 1)
-            # if go_res:
-            #     print('good good good for {} -'.format(self.env.landmark_list[n]), i)
-            # action_id = self.go_to_here(destination)
-            # while True:
-            #     time.sleep(1)
-            #     try:
-            #         if self.server.notes[action_id]['informResult'] == 2:
-            #             break
-            #     except Exception as e:
-            #         print('~~~~~~~~~~~~~~~~', e,'---', len(self.server.notes), action_id)
-            # pos, info = self.where_npc()
-            # print('$$$$$arrive: ', pos)
-            time.sleep(0.5)
 
     def go_to_object(self, target='Seat', name='None_target', random_mode=1):
         pos, npc_info = self.query_information()
@@ -368,155 +303,99 @@ class Npc(object):
         # second = self.times.current_date.second
         return week, hour, minute
 
-    def continuous_simulation(self, length=10):
-        npc_day = {0: [
-            # 'id': 0, "schedule":
-            ['exercise', 'hallway'], ['stand', 'bedroom'], ['stand', 'bedroom'], ['stand', 'bedroom'],
-            ['stand', 'bedroom'], ['stand', 'bedroom'], ['stand', 'bedroom'], ['stand', 'bedroom'],
-            #  -> 0-8h: room    ->   9-11h: office  ->   12-13h: kitchen
-            ['sit', 'office'], ['playComputer', 'office'], ['playComputer', 'office'], ['playComputer', 'office'],
-            ['sitLookHandObject', 'office'],
-            #  -> 14-15h: dating   16-17h: meetingroom   18-19h: kitchen
-            ['layingDownOnDoor', 'office'], ['playComputer', 'office'], ['playComputer', 'office'],
-            ['playComputer', 'office'], ['layingDownOnDoor', 'office'], ['sitLookHandObject', 'office'],
-            # 20-21h: lobby   22-23h: bedroom
-            ['playComputer', 'office'], ['playComputer', 'office'], ['layingDownOnDoor', 'office'], ['playComputer', 'office'], ['playComputer', 'office']
-        ], -1: [
-            # 'id': 0, "schedule":
-            ['stand', 'bedroom'], ['stand', 'bedroom'], ['stand', 'bedroom'], ['stand', 'bedroom'],
-            ['stand', 'bedroom'], ['stand', 'hallway'], ['stand', 'bedroom'], ['stand', 'bedroom'],
-            #  -> 0-8h: room    ->   9-11h: office  ->   12-13h: kitchen
-            ['sit', 'office'], ['playComputer', 'office'], ['playComputer', 'office'], ['sit', 'kitchen'],
-            ['sit', 'kitchen'],
-            #  -> 14-15h: dating   16-17h: meetingroom   18-19h: kitchen
-            ['sit', 'mark'], ['playGame', 'mark'], ['waveHandAtWaist', 'meeting room'],
-            ['waveHandOverHead', 'meeting room'], ['sit', 'kitchen'], ['sitLookHandObject', 'kitchen'],
-            # 20-21h: lobby   22-23h: bedroom
-            ['exercise', 'lobby'], ['dance', 'lobby'], ['stand', 'bedroom'], ['stand', 'bedroom'], ['stand', 'bedroom']
-        ], 1:
-         [
-            # 'id': 0, "schedule":
+    def behavior_perform(self):
+        with open("data/npc_schedule.json", "r") as json_file:
+            data = json.load(json_file)
+        schedule = data[str(self.person_id)]['schedule']
+        week, hour, minute = 99, 99, 99
+        while 1:
+            week_n, hour_n, min_n = self.get_now_time()
+            if hour != hour_n:  # or min_n == 30
+                week, hour, minute = week_n, hour_n, min_n
+                if self.action_state == 'sit':
+                    self.npc_action('stand')
+                    time.sleep(2)
+                elif self.actions[self.action_state][0] == 400:
+                    self.npc_action('interrupt')
+                    time.sleep(1)
+                    self.npc_action('stand')
+                    time.sleep(2)
+                for i in range(10):
+                    # print(schedule[str(round(hour))])
+                    planning = np.random.choice(schedule[str(round(hour))])
+                    location_now = self.env.location[planning['location']]
+                    result = self.goto_randomly(location_now[1], 2, 2, 20)
+                    if result:
+                        action_random, action_now = np.random.choice(planning['action']), 'stand'
+                        self.place_state = planning['location']
+                        res, obj = self.go_to_object('Seat')
+                        if res:
+                            suc = self.npc_action('sit', obj)
+                            if suc:
+                                action_now = 'sit'
+                        if action_random != 'stand':
+                            r = self.npc_action(action_random)
+                            if r:
+                                action_now = action_random
+                        now_time = self.times.current_date.strftime("%d %H:%M:%S")
+                        print(now_time, ': {} goes to the {} and perform action - {}'.format(
+                            self.person_id, planning['location'], action_now
+                        ))
 
-            #  -> 0-8h: room    ->   9-11h: office  ->   12-13h: kitchen
-            ['sit', 'office'], ['playComputer', 'office'], ['playComputer', 'office'], ['sit', 'kitchen'], ['exercise', 'hall'],
-            ['sit', 'kitchen'],
-            #  -> 14-15h: dating   16-17h: meetingroom   18-19h: kitchen
-            ['sit', 'mark'], ['exercise', 'mark'], ['waveHandAtWaist', 'meeting room'],
-            ['waveHandOverHead', 'meeting room'], ['sit', 'kitchen'], ['sitLookHandObject', 'kitchen'],
-            # 20-21h: lobby   22-23h: bedroom
-            ['exercise', 'lobby'], ['dance', 'lobby'], ['stand', 'bedroom'], ['stand', 'laboratory'], ['stand', 'laboratory'],
-            ['stand', 'laboratory'], ['stand', 'mark'], ['stand', 'bedroom'],
-            ['stand', 'mark'], ['exercise', 'mark'], ['stand', 'restroom'], ['dance', 'restroom']
-        ], 2:
-        [
-            # 'id': 0, "schedule":
-            ['sit', 'mark'], ['playGame', 'mark'], ['waveHandAtWaist', 'meeting room'],
-            ['waveHandOverHead', 'hallway'], ['waveHandAtWaist', 'hall'], ['stand', 'lobby'], ['stand', 'restroom'],
-            ['streachHead', 'restroom'], ['stand', 'bedroom'], ['dance', 'bedroom'], ['streachHead', 'hall'],
-            #  -> 0-8h: room    ->   9-11h: office  ->   12-13h: kitchen
-            ['stand', 'clinic'], ['stand', 'clinic'], ['playComputer', 'clinic'], ['playComputer', 'clinic'],
-            ['stand', 'kitchen'], ['waveHandOverHead', 'hallway'], ['exercise', 'hall'], ['stand', 'lobby'],
-            #  -> 14-15h: dating   16-17h: meetingroom   18-19h: kitchen
-            ['waveHandOverHead', 'meeting room'], ['sit', 'kitchen'], ['sitLookHandObject', 'kitchen'],
-            # 20-21h: lobby   22-23h: bedroom
-            ['waveHandOverHead', 'hallway'], ['dance', 'meeting room']
-        ]
-        }
-        for day_i in range(length):
-            week, hour, min = self.get_now_time()
-            print('############ now is {} '.format(week), hour, min)
-            self.one_day(npc_day[self.person_id])
-            if not self.server.state or self.server.stop_event.is_set() or not self.running:
-                return 0
-            while True:
-                week_n, hour_n, min_n = self.get_now_time()
-                if week != week_n:
-                    print('---------hey folks, new day is coming --------')
-                    break
 
-    def one_day(self, a_day):
-        # Get hours, minutes, and seconds
-        week, hour, min = self.get_now_time()
-        print('############now ', hour, min)
-        while hour < 23:
-            week, hour_now, min = self.get_now_time()
-            if not self.server.state or self.server.stop_event.is_set() or not self.running:
-                return 0
-            if hour_now != hour or min > 55:
-                hour = hour_now
-                tar_action, tar_place = a_day[hour][0], a_day[hour][1]
-                print('@@@@@@@ now is : {} {} {}'.format(hour, tar_action, tar_place))
-                print(self.action_state, '++++++++++', self.place_state)
-                if tar_action != self.action_state or tar_place != self.place_state:
-                    if self.action_state == 'sit':
-                        action_id = self.mapping_action_type[self.actions['stand'][0]]
-                        ins = copy.deepcopy(self.instruction_type[action_id])
-                        ins['actionId'] = 0
-                        ins['npcId'] = self.person_id
-                        self.action_execution(ins)
-                    elif self.actions[self.action_state][0] == 400:
-                        print('should iiiiiiiiiiiiiinterrupt')
-                        action_id = self.mapping_action_type[self.actions['interrupt'][0]]
-                        ins = copy.deepcopy(self.instruction_type[action_id])
-                        ins['actionPara']["showType"] = -1
-                        ins['npcId'] = self.person_id
-                        print(action_id, 'interrupt', ins)
-                        self.action_execution(ins)
+                if not self.server.state or self.server.stop_event.is_set() or not self.running:
+                    return 0
+                time.sleep(1)
 
-                if tar_place != self.place_state:
-                    res = self.go_to_place(tar_place)
-                    if res:
-                        self.place_state = tar_place
-                if tar_action != self.action_state:
-
-                    action_para = self.actions[tar_action]
-                    instruct = self.mapping_action_type[action_para[0]]
-                    print(action_para,'oooooooooo',instruct)
-                    ins_template = copy.deepcopy(self.instruction_type[instruct])
-
-                    # 先打断，先坐下------------
-                    ins_template['npcId'] = self.person_id
-                    if action_para[0]<300:
-                        ins_template['actionId'] = action_para[0]
-                    if tar_action == 'stand':
-                        pass
-                    elif tar_action == 'sit':
-                        pos, info = self.where_npc()
-                        if pos:
-                            tar = self.object_data.object_parsing(info)
-                            if tar:
-                                print(self.check_object_status(tar))
-                                # tar = self.object_data.object_parsing(self.near_items, ['Stool'])
-                                ins_template['actionPara']["itemId"] = tar
-                            else:
-                                ins_template['actionPara']["itemId"] = 1
-                                # sit fail
-                                # continue
-                    elif tar_action == 'pick':
-                        ins_template['actionPara']["itemId"] = 1
-                        ins_template['actionPara']["handType"] = -1
-                    elif tar_action == 'put':
-                        ins_template['actionPara']["position"] = {"x": 1, "y": 1, 'z': 1}
-                        ins_template['actionPara']["handType"] = -1
-                    elif tar_action == 'eat':
-                        ins_template['actionPara']["handType"] = -1
-                    elif action_para[0] == 400:
-                        # print('show show show')
-                        ins_template['actionPara']["showType"] = action_para[1]
-                    res = self.action_execution(ins_template)
-                    if res > 0:
-                        self.action_state = tar_action
-                        # print('*********successfully: ', tar_action, ' - ', tar_place)
-                        time.sleep(2)
+    def directive_following(self, directive):
+        if self.action_state != 'stand':
+            self.npc_action('stand')
             time.sleep(0.5)
-        return 1
+        self.server.object_transform(obj_type=0, target_id=self.person_id, pos=directive['npc_position'])
+        if directive["npc_action"] != self.action_state:
+            npc_action = directive["npc_action"]
+            if npc_action == 'sit':
+                res, obj = self.go_to_object('Seat')
+                if res:
+                    suc = self.npc_action('sit', obj)
+                    if suc:
+                        action_now = 'sit'
+            else:
+                #  perform other action, need to extend
+                if npc_action != 'stand':
+                    r = self.npc_action(npc_action)
+                pos, info = self.query_information()
+                if pos:
+                    self.place_state = self.object_data.point_determine(pos)
+
+        random_x, random_z = np.random.uniform(-0.05, 0.05), np.random.uniform(-0.05, 0.05)
+        target_obj_pos = directive['target_object_pos']
+        target_obj_pos['x'] += random_x
+        target_obj_pos['z'] += random_z
+        target_obj_name = directive['target_object_name']
+        # target_id = self.object_data.grasp_items[target_obj_name]['id']
+        target_info = self.object_data.get_info_from_name(target_obj_name)
+        # print(target_obj_name, target_info)
+        self.server.object_transform(obj_type=1, target_id=target_info['itemId'], pos=target_obj_pos)
+        self.times.current_date = datetime.fromisoformat(directive['time'])
+        # go_result = self.goto_randomly(directive['npc_position'], 1, 2, 20)
+
+    def random_behavior(self, room, probability=6):
+        random_action = np.random.randint(0, probability)
+        if random_action == 0:
+            rooms = list(self.env.location.keys())
+            del rooms[rooms.index(room)]
+            random_loc = np.random.choice(rooms)
+            location_now = self.env.location[random_loc]
+            random_pos_index = np.random.randint(1, len(location_now))
+            random_pos = location_now[random_pos_index]
+            self.server.object_transform(target_id=self.person_id, pos=random_pos)
+            time.sleep(0.1)
 
     def npc_action(self, tar_action, tar_object=0):
         action_para = self.actions[tar_action]
         instruct = self.mapping_action_type[action_para[0]]
-        # print(action_para, 'oooooooooo', instruct)
         ins_template = copy.deepcopy(self.instruction_type[instruct])
-        # ------------
         ins_template['npcId'] = self.person_id
         if action_para[0] < 300:
             ins_template['actionId'] = action_para[0]
@@ -568,9 +447,7 @@ class Npc(object):
                     break
             except Exception as e:
                 pass
-                # print('~~~~~~~~~~~~~~~~', e, '---', len(self.server.notes), action_id)
-        # pos = self.where_npc()
-        # print('$$$$$arrive: ', pos)
+                # print('~~~~~~~~~~~~~~~~', e, '---', len(self.server.notes), action_id
         return res
 
     def check_object_status(self, target=1):
@@ -612,11 +489,6 @@ class Npc(object):
         nparr = np.frombuffer(byte_array, np.uint8)
         image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        # image = Image.open(io.BytesIO(byte_array))
-        # print(image.size)
-        # Display Image
-        # image.show()
-        # image.save('img1.png')
         return image
 
 
@@ -690,6 +562,236 @@ class Agent(object):
                 self.grasp_object(target_id)
         return 0
 
+    def object_interaction(self, input_matrix, manipulaton=1, type=0):
+        # manipulation=0 view for recognize, manipulation=1 grasp, 2 approach,
+        # camera type=0 head camera, 1 shows hand camera, suggest not to use this function while moving
+        ob_rgb = self.observation_camera(type)
+        seg, tags = self.get_segmentation(type, 1)
+        if isinstance(ob_rgb, np.ndarray) and isinstance(seg, np.ndarray) and tags:
+            check_for_LMM = {'seg_matrix': seg, 'tags': tags}
+        else: return 0
+        target_list = []
+        if np.sum(input_matrix) == 0:
+            return 0
+        if check_for_LMM:
+            for i in range(input_matrix.shape[0]):
+                for j in range(input_matrix.shape[1]):
+                    if input_matrix[i][j] > 0:
+                        target_list.append(check_for_LMM['seg_matrix'][i][j])
+            counter = Counter(target_list)
+            element_list = []
+            try:
+                most_common_element, occurrences = counter.most_common(1)[0]
+                num = min(len(counter), 3)
+                element_list = counter.most_common(num)
+            except:
+                print('no object or target in the input matrix')
+                return 0
+            for element in element_list:
+                most_common_element, occurrences = element
+                target_id, is_npc = None, False
+                if most_common_element and occurrences / len(target_list) > 0.33:
+                    target_obj = check_for_LMM['tags'][int(most_common_element)]
+                    try:
+                        split_list = target_obj.split('_')
+                        if split_list[0].lower() == 'npc':
+                            target_id = int(split_list[2])
+                            is_npc = True
+                        else:
+                            target_id = int(split_list[-1])
+                            obj_n = split_list[0]
+                    except:
+                        pass
+                    if target_id is None: return 0
+                if is_npc:
+                    pos, tar_obj_info = self.npcs[target_id].query_information()
+                else:
+                    tar_obj_info = self.object_information_query(obj_id=target_id)
+                    if not tar_obj_info: return 0
+                if manipulaton == 1:
+                    if "Grabable" not in tar_obj_info['features']: continue
+                    pos, info = self.pos_query()
+                    if self.env.calculate_distance(tar_obj_info['position'], pos) > 3.0:
+                        return 0
+                    elif self.env.calculate_distance(tar_obj_info['position'], pos) > 1.0:
+                        self.goto_target_goal(tar_obj_info['position'], 1, 1, position_mode=0)
+                    re = self.direction_adjust(position=tar_obj_info['position'])
+                    a = self.ik_calculation(tar_obj_info['position'])
+                    if a:
+                        self.arm_control(a)
+                        time.sleep(1)
+                    res = self.grasp_object(target_id)
+                    self.joint_control(joint_id=5, target=0)
+                    if res:
+                        return res
+                elif manipulaton == 2:
+                    res = self.goto_target_goal(tar_obj_info['position'], 1.5, 1, position_mode=0)
+                    return res
+                return 0
+
+    def get_room_area(self, target_room='F3_KitchenRoom'):
+        room_info = None
+        for room_i in self.object_data.room_area:
+            if room_i['name'] == target_room:
+                room_info = room_i
+                break
+        if room_info is None: return None
+        room_accessible_area = []
+        x_max, x_min, z_max, z_min, y = room_info['x'][1], room_info['x'][0], room_info['z'][1], room_info['z'][0], room_info['y']
+        floor, map_i1, map_j1, iso = self.server.maps.get_point_info((x_max, y, z_max))
+        floor, map_i2, map_j2, iso = self.server.maps.get_point_info((x_min, y, z_min))
+        map_i_min, map_i_max = min(map_i1, map_i2), max(map_i1, map_i2)
+        map_j_min, map_j_max = min(map_j1, map_j2), max(map_j1, map_j2)
+        map = copy.deepcopy(self.object_data.sematic_map[floor])
+        map = np.array(map)
+        for ii in range(map_i_min, map_i_max + 1):
+            for jj in range(map_j_min, map_j_max + 1):
+                if map[ii][jj] == 1:
+                    close_to_obstacle = False
+                    for iii in range(max(0, ii - 1), min(map.shape[0], ii + 2)):
+                        for jjj in range(max(0, jj - 1), min(map.shape[1], jj + 2)):
+                            if map[iii, jjj] == 0:
+                                close_to_obstacle = True
+                    if not close_to_obstacle:
+                        room_accessible_area.append((ii, jj))
+                        map[ii][jj] = 3
+        return room_accessible_area
+
+    def get_receptacles_within_room(self, room_name='F3_KitchenRoom'):
+        room_receptacle = self.object_data.room_receptacles[room_name]['receptacles']
+        room_receptacles = [[i, rec['name']] for i, rec in enumerate(room_receptacle)]
+        # 标注的容器描述和名字，例如黄色的桌子
+        return room_receptacles
+
+    def calculate_2D_distance(self, point1, point2):
+        dis = np.sqrt((point1[0] - point2[0])**2 + (point1[1] - point2[1])**2)
+        return dis
+
+    def goto_receptacle(self, room='F3_KitchenRoom', recepacle=0, random=0):
+        room_receptacle = self.object_data.room_receptacles[room]['receptacles'][recepacle]
+        pos, info = self.pos_query()
+        floor_robot, robot_i, robot_j = self.map_position_agent['floor'], self.map_position_agent['x'], self.map_position_agent['y']
+        floor_receptacle, rec_i, rec_j, _ = self.server.maps.get_point_info(room_receptacle['position'])
+        if floor_receptacle != floor_receptacle:
+            print('robot and receptacle is not the same floor !')
+            return 0,0
+        width = abs(room_receptacle['map_i_max'] - room_receptacle['map_i_min'])
+        length = abs(room_receptacle['map_j_max'] - room_receptacle['map_j_min'])
+        scale = self.server.maps.maps_info[floor_robot]['scale']
+        ob_distance = np.sqrt(width**2+length**2)*1.0
+        free_area = self.get_room_area(room)
+        reasonable_points = []
+        for po in free_area:
+            if self.calculate_2D_distance(po, (rec_i, rec_j)) < ob_distance:
+                reasonable_points.append(po)
+        if len(reasonable_points) == 0: return 0, 0
+        distances = [np.sqrt((i - robot_i) ** 2 + (j - robot_j) ** 2) for i, j in reasonable_points]
+        sorted_valid_points = [point for _, point in sorted(zip(distances, reasonable_points))]
+        target_point = sorted_valid_points[0]
+        # target_point = reasonable_points[0]
+        if random:
+            random_i = np.random.randint(0, len(reasonable_points))
+            target_point = reasonable_points[random_i]
+        res = self.goto_target_goal((floor_robot, target_point[0], target_point[1]), radius=1, delete_dis=1, position_mode=1)
+        if res:
+            self.head_camera_look_at(room_receptacle['position'], accuracy=1)
+        return res, room_receptacle
+
+    def depth_estimation(self, matrix_target, depth, field_of_view=90):
+        target_depth = np.multiply(matrix_target, depth)
+        sum_non_zero = np.sum(target_depth)
+        count_non_zero = np.count_nonzero(target_depth)
+        average_depth = sum_non_zero / count_non_zero
+        non_zero_indices = np.nonzero(target_depth)
+        # non_zero_elements = target_depth[non_zero_indices]
+        # average_non_zero = np.mean(non_zero_elements)
+        x_indices, y_indices = non_zero_indices[0], non_zero_indices[1]
+        average_x, average_y = np.mean(x_indices), np.mean(y_indices)
+        y = matrix_target.shape[1]
+        degree = ((average_y-150)/y) * 90
+        return average_depth, degree
+
+    def target_direction(self, degree=20, distance=1, target_degree_view=0):
+        #   degree is the camera
+        pos, info = self.pos_query()
+        direction_degree = self.direction_degree
+        # degree = info['jointJointTarget']
+        camera_direction = - degree + direction_degree
+        print(camera_direction, direction_degree, self.direction_vector)
+        floor_r, r_i, r_j = self.map_position_agent['floor'], self.map_position_agent['x'], self.map_position_agent['y']
+        # FOV field of view = 90, target_degree_view: left -, right +
+        camera_direction = camera_direction - target_degree_view
+        scale = self.server.maps.maps_info[floor_r]['scale']
+        target_dis = distance / scale
+        map = copy.deepcopy(self.object_data.sematic_map[floor_r])
+        camera_direction = np.deg2rad(camera_direction)
+        target_i, target_j = r_i + np.cos(camera_direction)*target_dis, r_j + np.sin(camera_direction)*target_dis
+        map[round(target_i)][round(target_j)] = 5
+        # plt.imshow(map)
+        # plt.grid(False)
+        # plt.show()
+        approximate_point = (round(floor_r), round(target_i), round(target_j))
+        return approximate_point
+
+    def observation(self, degree=0, camera=0, up_down=10):
+        # Depression angle, camera 0 is head 1 is hand
+        if camera == 0:
+            self.joint_control(joint_id=4, target=up_down)
+            self.joint_control(joint_id=14, target=degree)
+            ob_rgb = self.observation_camera(camera)
+        elif camera == 1:
+            if abs(degree) > 150:
+                return None
+            self.joint_control(joint_id=5, target=degree)
+            ob_rgb = self.observation_camera(camera)
+        return ob_rgb
+
+    def look360(self, pitch=0):
+        m0 = self.observation(-90, up_down=pitch)
+        m1 = self.observation(0, up_down=pitch)
+        m2 = self.observation(90, up_down=pitch)
+        m3 = self.observation(180, up_down=pitch)
+        fig, axs = plt.subplots(nrows=1, ncols=4, figsize=(12, 4))
+
+        axs[0].imshow(m0)
+        axs[0].set_title('Matrix m0')
+        axs[0].axis('off')
+
+        axs[1].imshow(m1)
+        axs[1].set_title('Matrix m1')
+        axs[1].axis('off')
+
+        axs[2].imshow(m2)
+        axs[2].set_title('Matrix m2')
+        axs[2].axis('off')
+
+        axs[3].imshow(m3)
+        axs[3].set_title('Matrix m3')
+        axs[3].axis('off')
+
+        plt.tight_layout()
+        plt.show()
+        return [m0, m1, m2, m3]
+
+    def goto_and_grasp(self, obj_name=None, target_id=None):
+        if target_id is None:
+            tars = self.object_data.object_query([obj_name])
+            if len(tars) == 0: return 0
+            target_id = tars[0]
+        tar_obj_info = self.object_information_query(obj_id=target_id)
+        if not tar_obj_info: return 0
+        print(tar_obj_info)
+        self.goto_target_goal(tar_obj_info['position'], 1, 1, position_mode=0)
+        re = self.direction_adjust(position=tar_obj_info['position'])
+        a = self.ik_calculation(tar_obj_info['position'])
+        if a:
+            print('---------', a)
+        else:
+            a = [-0.2, 0, 0.4, 0.6, 0.3]
+        self.arm_control(a)
+        self.grasp_object(target_id)
+        self.joint_control(joint_id=5, target=0)
+
     def object_information_query(self, obj_id=0):
         instruction = {"requestIndex": 0, "targetType": 1, "targetId": obj_id}
         r_id = self.server.send_data(2, instruction, 1)
@@ -697,87 +799,6 @@ class Agent(object):
         if object_info:
             object_info = eval(object_info['statusDetail'])
         return object_info
-
-    def ik_control(self, tar=['apple']):
-        obj_n = self.object_data.object_query(tar)
-        if len(obj_n) == 0:
-            return 0
-        obj = obj_n[0]
-        # ----------------- read the id of the target object
-        pos_request = {"requestIndex": 0, "targetType": 1, "targetId": obj}
-        r_id = self.server.send_data(2, pos_request, 1)
-        obj_info = self.wait_for_respond(r_id, 15)
-        if obj_info:
-            pos_world = eval(obj_info['statusDetail'])
-            # the world position of the target object
-        else:
-            # return 0
-            pos_world = {'position': {'x': 28.81, 'y': 1.01, 'z': -2.997}}
-
-        self.direction_adjust(pos_world['position'])
-        # -----------------------pose adjustment-----------------
-
-        pos_transform = {"requestIndex": 1, "actionId": 201, "actionPara": json.dumps(pos_world)}
-        # ----------------- get the object information-----------------
-        r_id = self.server.send_data(5, pos_transform, 1)
-        obj_info1 = self.wait_for_respond(r_id, 15)
-        if not obj_info1:
-            return 0
-        pos_relative = eval(obj_info1['information'])['position']
-        print(obj_info1, '---------------------------IK relative position----------------------')
-        joint_targets = self.ik_process(pos_relative['x'], 0, pos_relative['z'])
-        #
-        # --------------- calculate the relative position for IK estimate-----------------
-        target_execute = {"requestIndex": 1, "actionId": 3, "actionPara": json.dumps({'result': 1, 'data': joint_targets})}
-        r_id = self.server.send_data(5, target_execute, 1)
-        robot_info1 = self.wait_for_respond(r_id, 30)
-        print(robot_info1, '-===-=---------IK perform')
-        time.sleep(5)
-        # --------------- execute the joint targets for arrive the object-----------------
-
-        grasp_execute = {"requestIndex": 1, "actionId": 4, "actionPara": json.dumps({'itemId': obj})}
-        r_id = self.server.send_data(5, grasp_execute, 1)
-        robot_info2 = self.wait_for_respond(r_id, 30)
-        print(robot_info2, '-===-=---------grasp')
-        time.sleep(3)
-        # --------------- grasping begin-----------------
-
-        tars = joint_targets
-        if 0:
-            try:
-                # tars[0] -= 0.2
-                target_execute = {"requestIndex": 1, "actionId": 3,
-                                  "actionPara": json.dumps({'result': 1, 'data': tars})}
-                r_id = self.server.send_data(5, target_execute, 1)
-                robot_info1 = self.wait_for_respond(r_id, 30)
-                print(robot_info1, '-===-=---------high')
-                time.sleep(5)
-            except: pass
-        # target_execute = {"requestIndex": 1, "actionId": 3,
-        #                   "actionPara": json.dumps({'result': 1, 'data': tars})}
-        # r_id = self.server.send_data(5, target_execute, 1)
-        # robot_info1 = self.wait_for_respond(r_id, 30)
-        # print(robot_info1, '-===-=---------adjkwdna')
-        # time.sleep(5)
-        return 1
-
-        self.rotate_right(30)
-
-        release_execute = {"requestIndex": 1, "actionId": 5}
-        r_id = self.server.send_data(5, release_execute, 1)
-        robot_info3 = self.wait_for_respond(r_id, 20)
-        print(robot_info3, '-===-=---------release')
-
-        self.rotate_right(20)
-
-        # normal pose for robot arm
-        tars = [-0.5,0,0.4,0.6,0.3]
-        target_execute = {"requestIndex": 1, "actionId": 3,"actionPara": json.dumps({'result': 1, 'data': tars})}
-        r_id = self.server.send_data(5, target_execute, 1)
-        robot_info1 = self.wait_for_respond(r_id, 30)
-        print(robot_info1, '-===-=---------normal pose')
-
-        self.pos_query()
 
     def ik_calculation(self, pos_world):
         try:
@@ -804,6 +825,10 @@ class Agent(object):
         # print(robot_info1, '======---------IK perform')
         return robot_info1
 
+    def initial_pose(self):
+        a = [-0.35, 0, 0.3, 0.3, 0.1]
+        return self.arm_control(a)
+
     def grasp_object(self, obj_id):
         if not self.is_grasp:
             grasp_execute = {"requestIndex": 1, "actionId": 4, "actionPara": json.dumps({'itemId': obj_id})}
@@ -826,8 +851,9 @@ class Agent(object):
             return robot_info3
         return None
 
-    def joint_control(self, joint_id, target):
-        target = np.radians(target)
+    def joint_control(self, joint_id, target, radian=1):
+        if radian:
+            target = np.radians(target)
         target_execute = {"requestIndex": 1, "actionId": 2, "actionPara": json.dumps({'jointId': joint_id, 'data': target})}
         r_id = self.server.send_data(5, target_execute, 1)
         robot_info = self.wait_for_respond(r_id, 100)
@@ -851,7 +877,7 @@ class Agent(object):
         instruct['actionPara'] = json.dumps(instruct['actionPara'])
         r_id = self.server.send_data(5, instruct, 1)
         start_time = time.time()
-        time.sleep(dis*3)
+        time.sleep(dis)
         while True:
             time.sleep(0.2)
             try:
@@ -862,9 +888,9 @@ class Agent(object):
                 print('~~~~~~~~~~~~~~~~', e, '---', len(self.server.notes), r_id)
         # Record End Time
         end_time = time.time()
-        # Calculate the running time of function A
+        # Calculate the running time of movement
         execution_time = end_time - start_time
-        print("Move forward: ", execution_time, "s")
+        # print("Move forward: ", execution_time, "s")
         return 1
 
     def rotate_right(self, degree=10):
@@ -878,7 +904,6 @@ class Agent(object):
         return res
 
     def get_all_map(self):
-        # self.server.ma
         for map_i in range(3):
             re_id = self.server.send_data(2, {"requestIndex": 101, "targetType": 2, "targetId": map_i}, 1)
             time.sleep(0.1)
@@ -892,7 +917,7 @@ class Agent(object):
                 except Exception as e:
                     pass  # print('~~~~~~~~map~~~~~~~~', e)
                 time.sleep(0.1)
-        print('get all map: ', type(self.server.maps.floor1), type(self.server.maps.floor2), type(self.server.maps.floor3))
+        # print('get all map: ', type(self.server.maps.floor1), type(self.server.maps.floor2), type(self.server.maps.floor3))
 
     def pos_query(self):
         info, inf, pos = None, None, None
@@ -928,11 +953,11 @@ class Agent(object):
                 return pos, inf
         return pos, inf
 
-    def move_to(self, n=9):
-        destination = self.env.landmark[self.env.landmark_list[n]][0]
-        return destination
-
     def go_to_there(self, pos, command=0):
+        try:
+            y = pos[1]
+        except:
+            pos = [pos['x'], pos['y'], pos['z']]
         if not command:
             command = {"requestIndex": 10, "actionId": 6, "actionPara": {'position': {"x": 0.5, "y": 1.0, "z": 0}}}
         command['actionPara']['position']['x'] = pos[0]
@@ -942,7 +967,7 @@ class Agent(object):
         re_id = self.server.send_data(5, command, 1)
         return re_id
 
-    def goto_target_goal(self, position_tar, radius=1, delete_dis=3, times=6, position_mode=0, accurate=0):
+    def goto_target_goal(self, position_tar, radius=1, delete_dis=2, times=6, position_mode=0, accurate=0):
         # 0 (world pos) position_tar:(0.5, 0.1, 1.2), 1: (x=floor_n, y=map_i, z=map_j)
         try:
             xx, yy, zz = position_tar[0], position_tar[1], position_tar[2]
@@ -962,6 +987,8 @@ class Agent(object):
             p_i, p_j = point_list[0][0], point_list[0][1]
             # translate the grid pos to the world pos
             pos_i, pos_j = self.server.maps.get_an_aligned_world_coordinate_randomly(floor, p_i, p_j)
+            if accurate:
+                pos_i, pos_j = p_i, p_j
             position_go = (pos_i, self.server.maps.floors[floor], pos_j)
             # print(' now plan to {}'.format(position_go))
             for i in range(2):
@@ -1015,16 +1042,9 @@ class Agent(object):
         ins = {"requestIndex": 1, "actionId": c_type, "actionPara": {'height': 640, 'width': 480}}
         # new instruction
         action_id = self.server.send_data(5, ins, 1)
-        for ii in range(60):
-            time.sleep(0.2)
-            try:
-                res = self.server.notes[action_id]
-                break
-            except: pass
+        res = self.wait_for_respond(action_id, 60)
         if not res:
             return res
-        # with open('data.json', 'w') as file:
-        #     json.dump(res, file)
         img = json.loads(res["information"])
         im = img["multiVisionBytes"][0]['bytes']
         byte_array = bytes(im)
@@ -1032,10 +1052,6 @@ class Agent(object):
         np_arr = np.frombuffer(byte_array, np.uint8)
         image = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        # image = Image.open(io.BytesIO(byte_array))
-        # Display Image
-        # image.show()
-        # image.save('img2.png')
         return image
 
     def get_depth(self, camera_type=0):
@@ -1057,13 +1073,9 @@ class Agent(object):
         nparr = np.frombuffer(byte_array, np.uint8)
         image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        # cv2.imshow('image', image)
-        # cv2.waitKey(0)
-        # Display image loading and display PNG file
         # image = Image.open(io.BytesIO(byte_array))
         # image = image.convert('I;16')
         # pil_image = Image.fromarray(image.astype('uint8'), mode='L')
-        # pil_image.show()
         depth_matrix = image/255*10
         return depth_matrix
 
@@ -1117,11 +1129,11 @@ class Agent(object):
                 if rrggbb == self.object_data.background:
                     continue
                 pixel_id = rgb_id.get(rrggbb, 0)
-                if pixel_id:
+                if pixel_id is not None:
                     seg_matrix[x][y] = pixel_id
         values_set = set(np.unique(seg_matrix))
         for value in values_set:
-            value = int(value)
+            value = round(value)
             if value:
                 target[value] = object_tag[value]['tag']
         return seg_matrix, target
@@ -1203,87 +1215,54 @@ class Agent(object):
             outcome = self.goto_target_goal(location_now[ids], 2, 2, 20)
         return outcome
 
-    def navigate(self, map_floor, goal):
-        #  map of scene, goal to navigation
-        path_map = copy.deepcopy(self.server.maps.maps_info[map_floor]['grid'])
-        path_map = np.array(path_map)
-        print(f"started 1 at {time.strftime('%X')}")
-        self.pos_query()
-        start = (self.map_position_agent['x'], self.map_position_agent['y'])
-        # start_vector = (self.direction_vector['x'], self.direction_vector['y'])
-        # Input initial vector, initial coordinate point, and facing coordinate point
-        x0, y0 = 1, 0  # Initial vector
-        x, y = 0, 0  # Initial coordinate point
-        xx, yy = 0, 1  # Facing coordinate points
-
-        rotation_angle = self.calculate_rotation_angle(goal[0], goal[1])
-        print('-----', rotation_angle, '-------')
-        print(f"started 2 at {time.strftime('%X')}")
-        # path, turns = self.astar(start, goal, path_map)
-        # Plan the path to the goal
-        # manager = mp.Manager()
-        # shared_list1 = manager.list()
-        # shared_list2 = manager.list()
-        queue1 = Queue()
-        # shared_list1, shared_list2 = mp.Array('c', 0), mp.Array('c', 0)
-        # print(shared_list1, shared_list2)
-        process1 = Process(target=astar, args=(start, goal, path_map, [], [], queue1))
-        process1.start()
-        process1.join()
-        print(f"started 3 at {time.strftime('%X')}")
-        # for point in path:
-        #     if point in turns:
-        #         path_map[point[0], point[1]] = 3
-        #     else:
-        #         path_map[point[0], point[1]] = 2
-        # # turning
-        # print("turning here：", turns)
-        # # control agent to move according to path, Moving point by point
-        # for point in turns:
-        #     print(point)
-        # # Mark as 2 on the path
-        # for point in path:
-        #     path_map[point[0], point[1]] = 2
-        #
-        # # Output the points that need to turn
-        # print("Output the points that need to turn：")
-        # for point in turns:
-        #     # print(point)
-        #     path_map[point[0], point[1]] = 3
-        # # Visual map
-        # print(f"started 4 at {time.strftime('%X')}")
-        # plt.imshow(path_map, cmap='viridis', interpolation='nearest')
-        # plt.colorbar(ticks=[0, 1, 2])
-        # plt.title('Path Planning using A* Algorithm')
-        # plt.show()
-        # print(shared_list2, shared_list1)
-        shared_list1 = queue1.get()
-        shared_list2 = queue1.get()
-        print(shared_list2)
-        rotation_angle = self.calculate_rotation_angle(shared_list2[0][0], shared_list2[0][1])
-        print('-----', rotation_angle, '-------')
-        xxx, yyy, zzz = self.server.maps.get_world_position(map_floor, shared_list2[0][0], shared_list2[0][1])
-        dis = self.calculate_distance(xxx, zzz)
-        print('-----', dis, '-------')
-        # self.move_forward(dis)
-        print(f"started 5 at {time.strftime('%X')}")
-        # print(mp.cpu_count()) 16
+    # def navigate(self, map_floor, goal):
+    #     #  map of scene, goal to navigation
+    #     path_map = copy.deepcopy(self.server.maps.maps_info[map_floor]['grid'])
+    #     path_map = np.array(path_map)
+    #     print(f"started 1 at {time.strftime('%X')}")
+    #     self.pos_query()
+    #     start = (self.map_position_agent['x'], self.map_position_agent['y'])
+    #     # start_vector = (self.direction_vector['x'], self.direction_vector['y'])
+    #     # Input initial vector, initial coordinate point, and facing coordinate point
+    #     x0, y0 = 1, 0  # Initial vector
+    #     x, y = 0, 0  # Initial coordinate point
+    #     xx, yy = 0, 1  # Facing coordinate points
+    #
+    #     rotation_angle = self.calculate_rotation_angle(goal[0], goal[1])
+    #     print('-----', rotation_angle, '-------')
+    #     print(f"started 2 at {time.strftime('%X')}")
+    #     # path, turns = self.astar(start, goal, path_map)
+    #     # Plan the path to the goal
+    #     queue1 = Queue()
+    #     # shared_list1, shared_list2 = mp.Array('c', 0), mp.Array('c', 0)
+    #     # print(shared_list1, shared_list2)
+    #     process1 = Process(target=astar, args=(start, goal, path_map, [], [], queue1))
+    #     process1.start()
+    #     process1.join()
+    #     print(f"started 3 at {time.strftime('%X')}")
+    #     shared_list1 = queue1.get()
+    #     shared_list2 = queue1.get()
+    #     print(shared_list2)
+    #     rotation_angle = self.calculate_rotation_angle(shared_list2[0][0], shared_list2[0][1])
+    #     print('-----', rotation_angle, '-------')
+    #     xxx, yyy, zzz = self.server.maps.get_world_position(map_floor, shared_list2[0][0], shared_list2[0][1])
+    #     dis = self.calculate_distance(xxx, zzz)
+    #     print('-----', dis, '-------')
+    #     # self.move_forward(dis)
+    #     print(f"started 5 at {time.strftime('%X')}")
+    #     # print(mp.cpu_count()) 16
 
     def calculate_rotation_angle(self, xx, yy, accuracy=1):
         start = (self.map_position_agent['x'], self.map_position_agent['y'])
         if accuracy:
             start = (self.position_agent['x'], self.position_agent['z'])
         start_vector = (self.direction_vector['x'], self.direction_vector['y'])
-        # print(xx,yy,'=====', start, '=====', start_vector)
         x0, y0, x, y = start_vector[0], start_vector[1], start[0], start[1]
         v1 = np.array([x0, y0])  # Initial vector
         v2 = np.array([xx - x, yy - y])  # The vector of the oriented coordinate point relative to the initial coordinate point
-        # print('-----------------',v1,'-------',v2)
-        # 计算向量夹角
         dot_product = np.dot(v1, v2)
         det = np.linalg.det([v1, v2])
         angle_radians = np.arctan2(det, dot_product)
-        # angle_degrees = np.degrees(angle_radians)
         angle_degrees = np.degrees(np.arccos(np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))))
         cross_product = np.cross(v1, v2)# Determine the direction of rotation
         if cross_product > 0:
@@ -1292,12 +1271,26 @@ class Agent(object):
         elif cross_product < 0: pass
         #     right
         else: pass
-        # print(angle_degrees)
         return angle_degrees
 
-    def direction_adjust(self, position, accuracy=1):
+    def head_camera_look_at(self, position, accuracy=0):
+        try:
+            xx, yy = position['x'], position['z']
+        except:
+            xx, yy = position[0], position[2]
+        self.pos_query()
+        rotation_angle = self.calculate_rotation_angle(xx, yy, accuracy=accuracy)
+        result = self.rotate_right(rotation_angle)
+        # result = self.joint_control(14, rotation_angle)
+        return result
+
+    def direction_adjust(self, position, pos_input=0, accuracy=1):
         # world_position = (22.38, 0.1, -0.17) or {'x': , 'y': , 'z': }
-        flo, xx, yy, is_o = self.server.maps.get_point_info(position)
+        if pos_input:
+            flo, xx, yy = position[0], position[1], position[2]
+            accuracy = 0
+        else:
+            flo, xx, yy, is_o = self.server.maps.get_point_info(position)
         if accuracy:
             try:
                 xx, yy = position['x'], position['z']
@@ -1314,13 +1307,11 @@ class Agent(object):
     def calculate_distance(self, x_x, y_y):
         point1 = np.array([self.position_agent['x'], self.position_agent['y']])
         point2 = np.array([x_x, y_y])
-        # print(point2, point1)
         distance = np.linalg.norm(point2 - point1)
         return distance
 
     def ik_process(self, x, y, z):
         res = self.input_pos(self.robot, x, y, z)
-        # print(x, y, z, res)
         if np.all(res == -1):
             return 0
         else:
@@ -1338,9 +1329,7 @@ class Agent(object):
         # AT = SE3.Rt(A, t)
         # AT represents the 4 * 4 transformation matrix of the end effector
         sol = robot.ik(AT)
-        # print(sol)
         # print(robot.fkine([-0.11530289, 0.3, 0.24709773, 0.42730769, 0.72559458]))
-        # print(eul2r(0.3, 1.4, 0.02))
         if sol[1]:
             if plot:
                 robot.arm.plot(sol[0])
@@ -1351,7 +1340,7 @@ class Agent(object):
 
     def rotation_matrix(self, x, y, z):
         # print('hypotenuse and length of robot arm limit')return None
-        print(x, y, z)
+        # print(x, y, z)
         if x < -0.4:
             x = -0.4
         elif x > 0.5:
@@ -1372,7 +1361,6 @@ class Agent(object):
         a, b, c = -2.222439753175887, 0.7599754447016618, 1.981407645745737
         theta = a * z ** 2 + b * z + c
         phi = y * 4
-        # print(x, y, z, '!!!', phi, theta)
         A = eul2r(phi, theta, 0)
         t = [x, y, z]
         AT = SE3.Rt(A, t)
@@ -1474,9 +1462,7 @@ def astar(start, goal, map_matrix, list1, list2, queue, initial_direction=(1, 0)
         path_map[point[0], point[1]] = 2
 
     # Output the points that need to turn
-    print("需要转弯的点：")
     for point in turns:
-        # print(point)
         path_map[point[0], point[1]] = 3
     # Visual map
     print(f"started 4 at {time.strftime('%X')}")
