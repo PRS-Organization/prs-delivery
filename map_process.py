@@ -42,12 +42,6 @@ class RoomMap(object):
             x, y, z = point[0], point[1], point[2]
 
         ind, value = min(enumerate(self.floors), key=lambda lis: abs(y - lis[1]))
-        # if y > (self.floors[2]-1):
-        #     ind = 2
-        # elif y > (self.floors[1]-1):
-        #     ind = 1
-        # else:
-        #     ind = 0
         point_i, point_j = self.get_grid_position(ind, x, z)
         try:
             return ind, point_i, point_j, self.maps_info[ind]['grid'][point_i][point_j]
@@ -64,21 +58,18 @@ class RoomMap(object):
         random_y_j = np.random.uniform(point_j, point_j + accuracy)
         return random_x_i, random_y_j
 
-    def get_an_accessible_area(self, x, y, z, radius_meter=1.5, mode=0, sort=1):
+    def get_an_accessible_area(self, x, y, z, radius_meter=1.5, mode=0, sort=1, inflation=0):
         # mode 0 represent the world position, 1 is the matrix map(x=floor_n, y=map_i, z=map_j)
         if not mode:
             floor, map_i, map_j, is_obstacle = self.get_point_info([x, y, z])
         else:
-            floor, map_i, map_j = x, y, z
+            floor, map_i, map_j = round(x), round(y), round(z)
             is_obstacle = self.maps_info[floor]['grid'][map_i][map_j]
         map_array = np.array(self.maps_info[floor]['grid'])
-        print(floor, map_i, map_j, is_obstacle)
-
         radius = radius_meter / self.maps_info[floor]['scale']
         # Determine the scope of the query domain
         min_i, max_i = round(max(0, map_i - radius)), round(min(map_array.shape[0] - 1, map_i + radius))
         min_j, max_j = round(max(0, map_j - radius)), round(min(map_array.shape[1] - 1, map_j + radius))
-        # print(min_i, max_i, min_j, max_j)
         # Find feasible points within the specified radius
         valid_points = []
         # exclude points with a distance of 1 from obstacles
@@ -87,10 +78,11 @@ class RoomMap(object):
             for j in range(min_j, max_j + 1):
                 if map_array[i, j] != 0 and ((i - map_i) ** 2 + (j - map_j) ** 2) <= radius ** 2:
                     too_close_to_obstacle = False
-                    for ii in range(max(0, i - 1), min(map_array.shape[0], i + 2)):
-                        for jj in range(max(0, j - 1), min(map_array.shape[1], j + 2)):
-                            if map_array[ii, jj] == 0:
-                                too_close_to_obstacle = True
+                    if inflation:
+                        for ii in range(max(0, i - 1), min(map_array.shape[0], i + 2)):
+                            for jj in range(max(0, j - 1), min(map_array.shape[1], j + 2)):
+                                if map_array[ii, jj] == 0:
+                                    too_close_to_obstacle = True
                     if not too_close_to_obstacle:
                         valid_points.append((i, j))
         if sort:
@@ -98,7 +90,7 @@ class RoomMap(object):
             distances = [np.sqrt((i - map_i) ** 2 + (j - map_j) ** 2) for i, j in valid_points]
             # Sort feasible points in ascending order of distance
             sorted_valid_points = [point for _, point in sorted(zip(distances, valid_points))]
-            print('here: ', len(sorted_valid_points), ' in radius ', radius_meter, ', scale', self.maps_info[floor]['scale'])
+            # print('here: ', len(sorted_valid_points), ' in radius ', radius_meter, ', scale', self.maps_info[floor]['scale'])
             return floor, sorted_valid_points
         else:
             return floor, valid_points
@@ -182,7 +174,7 @@ points:[[0/1,x,y,z],[0/1,-19.94000,-0.04999,-59.4000],[0/1,x,y,z]]
 '''
 
 if __name__ == '__main__':
-    # read Map.JSON
+    # read Map.json
     file_name = "map/map4.json"
     with open(file_name, 'r') as file:
         json_data = json.load(file)
