@@ -1,9 +1,11 @@
-import matplotlib.pyplot as plt
-from socket_server import *
+from env.socket_server import *
+# from env.socket_server import server
+# import sys
+# sys.path.append('path_to_env_folder')
 
 if __name__ == '__main__':
     # Environment initialization
-    prs = PrsEnv(is_print=0, not_test_mode=1)
+    prs = PrsEnv(is_print=0, start_up_mode=0)
     prs.npc_start(5)
     # How many NPCs are there
     ma = np.array(prs.server.maps.floor3)
