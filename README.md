@@ -1,5 +1,5 @@
 [//]: # (# PRS-Test)
-# PRS Challenge: Human-centered Delivery Task Benchmark
+# PRS Challenge: Human-centered Delivery Benchmark
 ## Quick Start
 To get started with the Delivery Task Dataset, simply run the following command in your terminal:
 
