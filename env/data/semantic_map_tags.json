@@ -1,0 +1,381 @@
+{
+    "0": {
+        "0": "obstacles",
+        "1": "accessible area",
+        "4": [
+            "room0"
+        ],
+        "5": [
+            "room1"
+        ],
+        "6": [
+            "room2"
+        ],
+        "7": [
+            "room3"
+        ]
+    },
+    "1": {
+        "0": "obstacles",
+        "1": "accessible area",
+        "4": [
+            "room10",
+            "reception counter"
+        ],
+        "5": [
+            "room10",
+            "table"
+        ],
+        "6": [
+            "room10",
+            "table"
+        ],
+        "7": [
+            "room10",
+            "table"
+        ],
+        "8": [
+            "room10",
+            "table"
+        ],
+        "9": [
+            "room0",
+            "table"
+        ],
+        "10": [
+            "room0",
+            "table"
+        ],
+        "11": [
+            "room1",
+            "polygon table"
+        ],
+        "12": [
+            "room5",
+            "desk"
+        ],
+        "13": [
+            "room0"
+        ],
+        "14": [
+            "room1"
+        ],
+        "15": [
+            "room2"
+        ],
+        "16": [
+            "room3"
+        ],
+        "17": [
+            "room4"
+        ],
+        "18": [
+            "room5"
+        ],
+        "19": [
+            "room6"
+        ],
+        "20": [
+            "room7"
+        ],
+        "21": [
+            "room8"
+        ],
+        "22": [
+            "room9"
+        ],
+        "23": [
+            "room10"
+        ],
+        "24": [
+            "room11"
+        ],
+        "25": [
+            "room12"
+        ]
+    },
+    "2": {
+        "0": "obstacles",
+        "1": "accessible area",
+        "4": [
+            "room0",
+            "table"
+        ],
+        "5": [
+            "room0",
+            "bed"
+        ],
+        "6": [
+            "room1",
+            "table"
+        ],
+        "7": [
+            "room1",
+            "bed"
+        ],
+        "8": [
+            "room2",
+            "table"
+        ],
+        "9": [
+            "room2",
+            "bed"
+        ],
+        "10": [
+            "room3",
+            "table"
+        ],
+        "11": [
+            "room3",
+            "bed"
+        ],
+        "12": [
+            "room15",
+            "desk"
+        ],
+        "13": [
+            "room16",
+            "table"
+        ],
+        "14": [
+            "room16",
+            "table"
+        ],
+        "15": [
+            "room16",
+            "table"
+        ],
+        "16": [
+            "room16",
+            "reception counter"
+        ],
+        "17": [
+            "room16",
+            "table"
+        ],
+        "18": [
+            "room19",
+            "side table"
+        ],
+        "19": [
+            "room19",
+            "desk"
+        ],
+        "20": [
+            "room19",
+            "desk"
+        ],
+        "21": [
+            "room19",
+            "desk"
+        ],
+        "22": [
+            "room19",
+            "desk"
+        ],
+        "23": [
+            "room19",
+            "desk"
+        ],
+        "24": [
+            "room19",
+            "desk"
+        ],
+        "25": [
+            "room19",
+            "desk"
+        ],
+        "26": [
+            "room19",
+            "desk"
+        ],
+        "27": [
+            "room22",
+            "dinner counter"
+        ],
+        "28": [
+            "room22",
+            "coffee table"
+        ],
+        "29": [
+            "room4",
+            "table"
+        ],
+        "30": [
+            "room4",
+            "bed"
+        ],
+        "31": [
+            "room5",
+            "table"
+        ],
+        "32": [
+            "room5",
+            "bed"
+        ],
+        "33": [
+            "room17",
+            "desk"
+        ],
+        "34": [
+            "room6",
+            "table"
+        ],
+        "35": [
+            "room6",
+            "bed"
+        ],
+        "36": [
+            "room7",
+            "small table"
+        ],
+        "37": [
+            "room7",
+            "table"
+        ],
+        "38": [
+            "room7",
+            "kitchen counter"
+        ],
+        "39": [
+            "room7",
+            "kitchen wardrobe"
+        ],
+        "40": [
+            "room7",
+            "dinner counter"
+        ],
+        "41": [
+            "room21",
+            "table"
+        ],
+        "42": [
+            "room21",
+            "table"
+        ],
+        "43": [
+            "room8",
+            "table"
+        ],
+        "44": [
+            "room8",
+            "bed"
+        ],
+        "45": [
+            "room23",
+            "meeting table large"
+        ],
+        "46": [
+            "room9",
+            "table"
+        ],
+        "47": [
+            "room9",
+            "bed"
+        ],
+        "48": [
+            "room14",
+            "furnituregymdesk"
+        ],
+        "49": [
+            "room10",
+            "table"
+        ],
+        "50": [
+            "room10",
+            "bed"
+        ],
+        "51": [
+            "room11",
+            "table"
+        ],
+        "52": [
+            "room11",
+            "bed"
+        ],
+        "53": [
+            "room13",
+            "polygon table"
+        ],
+        "54": [
+            "room12",
+            "table"
+        ],
+        "55": [
+            "room12",
+            "bed"
+        ],
+        "56": [
+            "room0"
+        ],
+        "57": [
+            "room1"
+        ],
+        "58": [
+            "room2"
+        ],
+        "59": [
+            "room3"
+        ],
+        "60": [
+            "room4"
+        ],
+        "61": [
+            "room5"
+        ],
+        "62": [
+            "room6"
+        ],
+        "63": [
+            "room7"
+        ],
+        "64": [
+            "room8"
+        ],
+        "65": [
+            "room9"
+        ],
+        "66": [
+            "room10"
+        ],
+        "67": [
+            "room11"
+        ],
+        "68": [
+            "room12"
+        ],
+        "69": [
+            "room13"
+        ],
+        "70": [
+            "room14"
+        ],
+        "71": [
+            "room15"
+        ],
+        "72": [
+            "room16"
+        ],
+        "73": [
+            "room17"
+        ],
+        "74": [
+            "room18"
+        ],
+        "75": [
+            "room19"
+        ],
+        "76": [
+            "room20"
+        ],
+        "77": [
+            "room21"
+        ],
+        "78": [
+            "room22"
+        ],
+        "79": [
+            "room23"
+        ]
+    }
+}

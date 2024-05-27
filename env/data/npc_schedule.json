@@ -1,0 +1,2535 @@
+{
+    "0": {
+        "id": 0,
+        "schedule": {
+            "0": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "1": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "2": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "3": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "4": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "5": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "6": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "7": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "8": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "9": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "10": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "11": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "12": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "13": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "14": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "15": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "16": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "17": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "18": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "19": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "20": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "21": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "22": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "23": [
+                {
+                    "location": "F3_Bedroom_0",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ]
+        }
+    },
+    "1": {
+        "id": 0,
+        "schedule": {
+            "0": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "1": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "2": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "3": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "4": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "5": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "6": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "7": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "8": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeRoom01",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "9": [
+                {
+                    "location": "F3_OfficeRoom01",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "10": [
+                {
+                    "location": "F3_OfficeRoom01",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "11": [
+                {
+                    "location": "F3_OfficeRoom01",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "12": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "13": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "14": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeRoom01",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "15": [
+                {
+                    "location": "F3_OfficeRoom01",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "16": [
+                {
+                    "location": "F3_OfficeRoom01",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "17": [
+                {
+                    "location": "F3_OfficeRoom01",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "18": [
+                {
+                    "location": "F3_OfficeRoom01",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "19": [
+                {
+                    "location": "F3_OfficeRoom01",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_HallRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "20": [
+                {
+                    "location": "F3_OfficeRoom01",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_HallRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "21": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_HallRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "22": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "23": [
+                {
+                    "location": "F3_Bedroom_1",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ]
+        }
+    },
+    "2": {
+        "id": 0,
+        "schedule": {
+            "0": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "1": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "2": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "3": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "4": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "5": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "6": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "7": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "8": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "9": [
+                {
+                    "location": "F3_OfficeRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "10": [
+                {
+                    "location": "F3_OfficeRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "11": [
+                {
+                    "location": "F3_OfficeRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "12": [
+                {
+                    "location": "F3_OfficeRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "13": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "14": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "15": [
+                {
+                    "location": "F3_OfficeRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "16": [
+                {
+                    "location": "F3_OfficeRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "17": [
+                {
+                    "location": "F3_OfficeRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "18": [
+                {
+                    "location": "F3_OfficeRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "19": [
+                {
+                    "location": "F3_OfficeRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_GymRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "20": [
+                {
+                    "location": "F3_OfficeRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_GymRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "21": [
+                {
+                    "location": "F3_OfficeRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_GymRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "22": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "23": [
+                {
+                    "location": "F3_Bedroom_2",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ]
+        }
+    },
+    "3": {
+        "id": 0,
+        "schedule": {
+            "0": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "1": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "2": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "3": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "4": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "5": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "6": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "7": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "8": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "9": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "10": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "11": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "12": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "13": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "14": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "15": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "16": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "17": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "18": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "19": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_GymRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "20": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_GymRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "21": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_GymRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "22": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "23": [
+                {
+                    "location": "F3_Bedroom_3",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ]
+        }
+    },
+    "4": {
+        "id": 0,
+        "schedule": {
+            "0": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "1": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "2": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "3": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "4": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "5": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "6": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "7": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "8": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "9": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "10": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "11": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "12": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "13": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_LivingRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "14": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_LivingRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "15": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "16": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "17": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "18": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "19": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_LivingRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "20": [
+                {
+                    "location": "F3_LivingRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "21": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_LivingRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "22": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "23": [
+                {
+                    "location": "F3_Bedroom_4",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ]
+        }
+    },
+    "5": {
+        "id": 0,
+        "schedule": {
+            "0": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "1": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "2": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "3": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "4": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "5": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "6": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "7": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "8": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "9": [
+                {
+                    "location": "F2_MedicalRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "10": [
+                {
+                    "location": "F2_MedicalRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "11": [
+                {
+                    "location": "F2_MedicalRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "12": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_HallRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "13": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_HallRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "14": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F2_MedicalRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "15": [
+                {
+                    "location": "F2_MedicalRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "16": [
+                {
+                    "location": "F2_MedicalRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "17": [
+                {
+                    "location": "F2_MedicalRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "18": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_HallRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "19": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_HallRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "20": [
+                {
+                    "location": "F3_HallRoom02",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "21": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "22": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "23": [
+                {
+                    "location": "F3_Bedroom_5",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ]
+        }
+    },
+    "6": {
+        "id": 0,
+        "schedule": {
+            "0": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "1": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "2": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "3": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "4": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "5": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "6": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "7": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "8": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "9": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "10": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "11": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "12": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "13": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "14": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "15": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "16": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "17": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "18": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "19": [
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_LivingRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "20": [
+                {
+                    "location": "F3_LivingRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "21": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_LivingRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_OfficeSpaceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "22": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "23": [
+                {
+                    "location": "F3_Bedroom_6",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ]
+        }
+    },
+    "7": {
+        "id": 0,
+        "schedule": {
+            "0": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "1": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "2": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "3": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "4": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "5": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "6": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "7": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "8": [
+                {
+                    "location": "F1_ConveyorRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "9": [
+                {
+                    "location": "F1_ConveyorRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "10": [
+                {
+                    "location": "F1_ConveyorRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "11": [
+                {
+                    "location": "F1_ConveyorRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "12": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "13": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "14": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "15": [
+                {
+                    "location": "F1_ConveyorRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "16": [
+                {
+                    "location": "F1_ConveyorRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "17": [
+                {
+                    "location": "F1_ConveyorRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "18": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "19": [
+                {
+                    "location": "F1_ConveyorRoom",
+                    "action": [
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_LivingRoom",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "20": [
+                {
+                    "location": "F1_ConveyorRoom",
+                    "action": [
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F3_LivingRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "21": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "22": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "23": [
+                {
+                    "location": "F3_Bedroom_7",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ]
+        }
+    },
+    "8": {
+        "id": 0,
+        "schedule": {
+            "0": [
+                {
+                    "location": "F3_Bedroom_8",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "1": [
+                {
+                    "location": "F3_Bedroom_8",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "2": [
+                {
+                    "location": "F3_Bedroom_8",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "3": [
+                {
+                    "location": "F3_Bedroom_8",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "4": [
+                {
+                    "location": "F3_Bedroom_8",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "5": [
+                {
+                    "location": "F3_Bedroom_8",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "6": [
+                {
+                    "location": "F3_Bedroom_8",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "7": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "8": [
+                {
+                    "location": "F1_EnergyRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "9": [
+                {
+                    "location": "F1_EnergyRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "10": [
+                {
+                    "location": "F1_EnergyRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "11": [
+                {
+                    "location": "F1_EnergyRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "12": [
+                {
+                    "location": "F1_EnergyRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "13": [
+                {
+                    "location": "F1_EnergyRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "14": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "15": [
+                {
+                    "location": "F1_EnergyRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "16": [
+                {
+                    "location": "F1_EnergyRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "17": [
+                {
+                    "location": "F1_EnergyRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "18": [
+                {
+                    "location": "F1_EnergyRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "19": [
+                {
+                    "location": "F1_EnergyRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "20": [
+                {
+                    "location": "F1_EnergyRoom",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "21": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "22": [
+                {
+                    "location": "F3_Bedroom_8",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "23": [
+                {
+                    "location": "F3_Bedroom_8",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ]
+        }
+    },
+    "9": {
+        "id": 0,
+        "schedule": {
+            "0": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "1": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "2": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "3": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "4": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "5": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "6": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "7": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "stand"
+                    ]
+                }
+            ],
+            "8": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "9": [
+                {
+                    "location": "F2_LabRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "10": [
+                {
+                    "location": "F2_LabRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "11": [
+                {
+                    "location": "F2_LabRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "12": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "13": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "14": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                },
+                {
+                    "location": "F2_LabRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "15": [
+                {
+                    "location": "F2_LabRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "16": [
+                {
+                    "location": "F2_LabRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                },
+                {
+                    "location": "F3_ConferenceRoom",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "17": [
+                {
+                    "location": "F2_LabRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "18": [
+                {
+                    "location": "F3_KitchenRoom",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "19": [
+                {
+                    "location": "F2_LabRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "20": [
+                {
+                    "location": "F2_LabRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "21": [
+                {
+                    "location": "F2_LabRoom03",
+                    "action": [
+                        "sit"
+                    ]
+                }
+            ],
+            "22": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ],
+            "23": [
+                {
+                    "location": "F3_Bedroom_9",
+                    "action": [
+                        "sit",
+                        "stand"
+                    ]
+                }
+            ]
+        }
+    }
+}
