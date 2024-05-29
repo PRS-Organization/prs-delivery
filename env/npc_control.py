@@ -71,7 +71,7 @@ class Env(object):
         try:
             distance = np.linalg.norm(point2_array - point1_array)
         except:
-            print(point1_array, point2_array)
+            # print(point1_array, point2_array)
             distance = np.linalg.norm(point2_array - point1_array)
         return distance
 
