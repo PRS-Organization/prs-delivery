@@ -1,0 +1,49 @@
+{
+    "0": {
+        "room0": "storage room 1",
+        "room1": "energy room",
+        "room2": "storage room 2",
+        "room3": "conveyor room"
+    },
+    "1": {
+        "room0": "hall room 2",
+        "room1": "hall room 1",
+        "room2": "warm room",
+        "room3": "lab room 2",
+        "room4": "lab room 1",
+        "room5": "medical room 3",
+        "room6": "server room",
+        "room7": "storage room",
+        "room8": "medical room 2",
+        "room9": "lab room 3",
+        "room10": "hall room 3",
+        "room11": "medical room 1",
+        "room12": "rest room"
+    },
+    "2": {
+        "room0": "bed room 4",
+        "room1": "bed room 10",
+        "room2": "bed room 8",
+        "room3": "bed room 2",
+        "room4": "bed room 11",
+        "room5": "bed room 5",
+        "room6": "bed room 6",
+        "room7": "kitchen room",
+        "room8": "bed room 7",
+        "room9": "bed room 9",
+        "room10": "bed room 3",
+        "room11": "bed room 1",
+        "room12": "bed room 0",
+        "room13": "hall room 1",
+        "room14": "gym room",
+        "room15": "office room 1",
+        "room16": "hall room 3",
+        "room17": "office room 2",
+        "room18": "rest room",
+        "room19": "office space",
+        "room20": "storage room",
+        "room21": "hall room 2",
+        "room22": "living room",
+        "room23": "conference room"
+    }
+}

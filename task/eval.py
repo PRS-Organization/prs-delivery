@@ -104,6 +104,8 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
     #     task_result = {'sub_result': {'grasp': res_grasp, 'object_find': res_find,
     #                                   'deliver': res_deliver, 'human_find': human_find},
     #                    'result': task_res, 'time': minutes_cost}
+        if task_result['time'] > 10:
+            continue
         task_r += int(task_result['result']/4)
         grasp_r += task_result['sub_result']['grasp']
         human_r += task_result['sub_result']['human_find']
@@ -120,7 +122,7 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
         # ["Task SR", "Object Manipulation SR", "Human Search SR", "Time Used"]
         output["result"] = [
             {
-                "train_split": {
+                "Delivery_dataset": {
                     "Task SR": task_r,
                     "Object Manipulation SR": grasp_r,
                     "Human Search SR": human_r,
@@ -129,13 +131,13 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
             }
         ]
         # To display the results in the result file
-        output["submission_result"] = output["result"][0]["train_split"]
+        output["submission_result"] = output["result"][0]["Delivery_dataset"]
         print("Completed evaluation for Dev Phase")
     elif phase_codename == "test":
         # print("Evaluating for Test Phase")
         output["result"] = [
             {
-                "test_split": {
+                "Delivery_dataset": {
                     "Task SR": task_r,
                     "Object Manipulation SR": grasp_r,
                     "Human Search SR": human_r,
@@ -144,7 +146,7 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
             }
         ]
         # To display the results in the result file
-        output["submission_result"] = output["result"][0]["test_split"]
+        output["submission_result"] = output["result"][0]["Delivery_dataset"]
         print("Completed evaluation for Test Phase")
     return output
 

@@ -10,9 +10,10 @@ import struct
 from enum import Enum
 # from game_demo import *
 import ast
-from env.map_process import RoomMap
-from env.npc_control import Npc, Agent
+from map_process import RoomMap
+from npc_control import Npc, Agent
 import datetime
+import numpy as np
 
 
 class EnvTime(object):
@@ -436,15 +437,16 @@ class ObjectsData(object):
     def __init__(self):
         with open('unity/PRS_Data/StreamingAssets/itemInfo.json', 'r') as file:
             json_data = json.load(file)
-        with open('unity/PRS_Data/StreamingAssets/roomInfo.json', 'r') as file:
-            room_data = json.load(file)
+        with open('data/map_room_data.json', 'r') as file:
+            room_data= json.load(file)
+        with open('data/map_receptacle_data.json.json', 'r') as file:
+            self.room_receptacles = json.load(file)
         with open('unity/PRS_Data/StreamingAssets/segmentationTagColorInfo.json', 'r') as file:
             seg_tag_data = json.load(file)
         with open('../data/npc_data.json', 'r') as file:
             json_npc = json.load(file)
-        with open('/EmbodiedAI02/VerticleSlice/Assets/StreamingAssets/receptacleInfo.json', 'r') as file:
-            json_receptcle = json.load(file)
-        rece = json_receptcle['receptacleItemBounds']
+        with open('data/room_mapping.json.json', 'r') as file:
+            room_names = json.load(file)
         # decode JSON
         seg_data = []
         rgb_id = dict()
@@ -455,7 +457,7 @@ class ObjectsData(object):
             r_n, g_n, b_n = '{:.2f}'.format(r_n), '{:.2f}'.format(g_n), '{:.2f}'.format(b_n)
             rgb = (r_n, g_n, b_n)
             rgb_id[rgb] = index_tag
-            if item_tag['tag'] == "Untagged":
+            if item_tag['tag'] == "UnTagged" or item_tag['tag'].lower() == "untagged":
                 self.background = rgb
 
         env_objects = []
@@ -463,205 +465,23 @@ class ObjectsData(object):
             data = json.loads(json_i)
             env_objects.append(data)
         env_rooms = []
-        for json_i in room_data['statusDetails']:
-            data = json.loads(json_i)
-            env_rooms.append(data)
-        room_index = []
-        for room_i, roo in enumerate(env_rooms):
-            # print()
-            xx, zz = [], []
-            for point in roo['roomBoudaryPoints']:
-                xx.append(point['x'])
-                zz.append(point['z'])
-            name = roo['roomName']
-            # na = name.split('_')
-            room_index.append({'name': name, 'x': [min(xx), max(xx)], 'y': roo['roomCenter']['y'], 'z': [min(zz), max(zz)]})
-            # print('----------------')
-        buliding_rooms = [dict(), dict(), dict()]
-        for ro in env_rooms:
-            y = ro['roomCenter']['y']
-            if y > -0.8:
-                buliding_rooms[2][ro['roomName']] = ro
-            elif y > -10:
-                buliding_rooms[1][ro['roomName']] = ro
-            else:
-                buliding_rooms[0][ro['roomName']] = ro
-        self.buliding_rooms = buliding_rooms
-        self.room_area = room_index
+        # for json_i in room_data.items():
+        #     data = json.loads(json_i)
+        #     env_rooms.append(data)
 
         self.objects = env_objects
-        self.rooms = env_rooms
+        self.room_area = env_rooms
         self.segment_tag = seg_data
         self.rgb_to_id = rgb_id
         self.characters = json_npc['npc']
         self.room_receptacles = None
-        self.sematic_map = [None, None, None]
-        # print(env_rooms)
-        grab_obj = [
-            'BoxedChocolate01', 'InjectableMedicationBottle_2', 'InjectableMedicationBottle_1', 'Apple_2', 'Kiwi',
-            'BoxedCake02', 'ButterSauce', 'PlasticBottle03', 'BoxedCake01', 'PlasticBottle03WithGreenLid',
-            'WaterBottle_Blue_3',
-            'WaterBottle_Blue_1', 'PlasticBottle03WithYellowLid', 'TomatoSauce', 'Spoon_2', 'Tomato', 'Cup_3', 'Cup_2',
-            'RedBeansCan', 'BaggedCake02', 'RedChill', 'MeatCan03', 'MeatCan01', 'PeaCan01', 'Cup_1', 'MeatCan02',
-            'ChocolateSauce', 'BaggedCake01', 'Spoon_1', 'MobilePhone_3', 'PlasticBottle03WithRedLid',
-            'ChiliSauce', 'MobilePhone_1', 'ConsolegamingPad', 'MobilePhone_2', 'Spoon_3', 'BoxedCake03', 'HoneySauce',
-            'Apple_1', 'Banana', 'BaggedCake03', 'BoxedChocolate02', 'InjectableMedicationBottle_3',
-            'WaterBottle_Blue_2',
-            'PeaCan02', 'PlasticBottle03WithBlueLid', 'Apple_3', 'PeanutSauce']
-        items = dict()
-        for obj in self.objects:
-            name = obj['itemName']
-            fea = obj['features']
-            if "Grabable" in fea and name in grab_obj:
-                items[name] = dict()
-                items[name]["id"] = obj['itemId']
-                items[name]['position'] = obj['position']
-        # print(items)
-        self.grasp_items = items
-        receptacles_information = {'F3_KitchenRoom': {'receptacles': [
-            {'name': 'Small Table (3)', 'feature': 'yellow', 'pos': {'x': -15.496, 'y': 0.0, 'z': -8.361}},
-            {'name': 'Table', 'feature': 'wooden dining', 'pos': {'x': -15.996, 'y': 0.0, 'z': -5.042}},
-            {'name': 'Kitchen Counter', 'feature': 'left', 'pos': {'x': -10.483, 'y': 0.0, 'z': -4.688}},
-            {'name': 'Kitchen Wardrobe', 'feature': 'wooden high', 'pos': {'x': -10.527, 'y': 0.0, 'z': -6.603}},
-            {'name': 'Dinner Counter', 'feature': 'middle', 'pos': {'x': -13.109, 'y': 0.0, 'z': -6.124}}]},
-            'F3_Bedroom_5': {'receptacles': [{'name': 'Table', 'feature': 'sturdy',
-                                              'pos': {'x': 13.58, 'y': 0.01, 'z': -27.902}},
-                                             {'name': 'Bed', 'feature': 'stylish',
-                                              'pos': {'x': 14.683, 'y': 0.01, 'z': -28.336}}]},
-            'F2_HallRoom02': {'receptacles': [{'name': 'Table (1)', 'feature': '',
-                                               'pos': {'x': 26.88, 'y': -5.167, 'z': -7.638}},
-                                              {'name': 'Table (2)', 'feature': '',
-                                               'pos': {'x': 26.88, 'y': -5.167, 'z': -5.174}}]},
-            'F2_HallRoom03': {'receptacles': [{'name': 'Table (1)', 'feature': '',
-                                               'pos': {'x': 26.073, 'y': -5.167, 'z': 4.748}},
-                                              {'name': 'Reception Counter', 'feature': '',
-                                               'pos': {'x': 21.354, 'y': -5.167, 'z': 5.55}},
-                                              {'name': 'Table (3)', 'feature': '',
-                                               'pos': {'x': 28.461, 'y': -5.167, 'z': 4.516}},
-                                              {'name': 'Table (2)', 'feature': '',
-                                               'pos': {'x': 27.206, 'y': -5.167, 'z': 5.7}},
-                                              {'name': 'Table (4)', 'feature': '',
-                                               'pos': {'x': 28.461, 'y': -5.167, 'z': 6.89}}]},
-            'F3_HallRoom02': {'receptacles': [{'name': 'Table (1)', 'feature': 'wall-adjacent',
-                                               'pos': {'x': 26.88, 'y': 0.0, 'z': -7.638}},
-                                              {'name': 'Table (2)', 'feature': 'light brown',
-                                               'pos': {'x': 26.88, 'y': 0.0, 'z': -5.174}}]},
-            'F3_OfficeSpaceRoom': {'receptacles': [{'name': 'Desk (8)', 'feature': 'rectangular',
-                                                    'pos': {'x': 2.841, 'y': -0.002,
-                                                            'z': 3.755}},
-                                                   {'name': 'Desk (3)', 'feature': 'compact',
-                                                    'pos': {'x': 7.973, 'y': -0.002,
-                                                            'z': 7.732}},
-                                                   {'name': 'Desk (4)', 'feature': 'modern',
-                                                    'pos': {'x': 1.812, 'y': -0.003,
-                                                            'z': 3.755}},
-                                                   {'name': 'Desk (6)', 'feature': 'wooden',
-                                                    'pos': {'x': 2.836, 'y': -0.002,
-                                                            'z': 7.745}},
-                                                   {'name': 'Desk (2)', 'feature': 'functional',
-                                                    'pos': {'x': 7.978, 'y': -0.002,
-                                                            'z': 3.784}},
-                                                   {'name': 'Desk (1)', 'feature': 'office',
-                                                    'pos': {'x': 6.949, 'y': -0.003,
-                                                            'z': 3.784}},
-                                                   {'name': 'Side Table', 'feature': 'tall',
-                                                    'pos': {'x': 4.838, 'y': 0.0, 'z': 5.93}},
-                                                   {'name': 'Desk (7)', 'feature': 'office',
-                                                    'pos': {'x': 6.944, 'y': -0.003,
-                                                            'z': 7.732}},
-                                                   {'name': 'Desk (5)', 'feature': 'work',
-                                                    'pos': {'x': 1.807, 'y': -0.003,
-                                                            'z': 7.745}}]}, 'F3_Bedroom_3': {
-                'receptacles': [
-                    {'name': 'Table', 'feature': 'wall-mounted', 'pos': {'x': 13.58, 'y': 0.01, 'z': -20.22}},
-                    {'name': 'Bed', 'feature': 'modern', 'pos': {'x': 14.683, 'y': 0.01, 'z': -20.654}}]},
-            'F3_HallRoom01': {'receptacles': [{'name': 'Polygon Table', 'feature': 'stone',
-                                               'pos': {'x': 12.727, 'y': 0.0, 'z': -5.639}}]},
-            'F3_GymRoom': {'receptacles': [{'name': 'Furniture_Gym_Desk', 'feature': 'dark gray',
-                                            'pos': {'x': 10.945, 'y': 0.0, 'z': 3.209}}]},
-            'F3_Bedroom_4': {'receptacles': [{'name': 'Table', 'feature': 'minimalist',
-                                              'pos': {'x': 25.7, 'y': 0.01, 'z': -29.25}},
-                                             {'name': 'Bed', 'feature': 'dark',
-                                              'pos': {'x': 24.597, 'y': 0.01, 'z': -28.816}}]},
-            'F3_OfficeRoom01': {'receptacles': [{'name': 'Desk 4', 'feature': 'versatile',
-                                                 'pos': {'x': -3.505, 'y': 0.0, 'z': -6.917}}]},
-            'F3_LivingRoom': {'receptacles': [{'name': 'Dinner Counter', 'feature': 'marble',
-                                               'pos': {'x': -3.09, 'y': 0.0, 'z': 5.787}},
-                                              {'name': 'Coffee table', 'feature': 'low',
-                                               'pos': {'x': -6.92, 'y': 0.041, 'z': 6.23}}]},
-            'F3_HallRoom03': {'receptacles': [{'name': 'Table (4)', 'feature': 'square',
-                                               'pos': {'x': 28.461, 'y': 0.0, 'z': 6.89}},
-                                              {'name': 'Reception Counter',
-                                               'feature': 'marmoreal',
-                                               'pos': {'x': 21.354, 'y': 0.0, 'z': 5.55}},
-                                              {'name': 'Table (2)', 'feature': 'rectangular',
-                                               'pos': {'x': 27.206, 'y': 0.0, 'z': 5.7}},
-                                              {'name': 'Table (3)', 'feature': 'small',
-                                               'pos': {'x': 28.461, 'y': 0.0, 'z': 4.516}},
-                                              {'name': 'Table (1)', 'feature': 'dark',
-                                               'pos': {'x': 26.073, 'y': 0.0, 'z': 4.748}}]},
-            'F3_Bedroom_9': {'receptacles': [{'name': 'Table', 'feature': 'elegant',
-                                              'pos': {'x': 13.58, 'y': 0.01, 'z': -43.28}},
-                                             {'name': 'Bed', 'feature': 'comfortable',
-                                              'pos': {'x': 14.683, 'y': 0.01, 'z': -43.714}}]},
-            'F3_Bedroom_2': {'receptacles': [{'name': 'Table', 'feature': 'rectangular',
-                                              'pos': {'x': 25.7, 'y': 0.01, 'z': -21.56}},
-                                             {'name': 'Bed', 'feature': 'simple',
-                                              'pos': {'x': 24.597, 'y': 0.01, 'z': -21.126}}]},
-            'F3_Bedroom_0': {'receptacles': [{'name': 'Table', 'feature': 'wooden',
-                                              'pos': {'x': 25.7, 'y': 0.01, 'z': -13.878}},
-                                             {'name': 'Bed', 'feature': 'wonderful',
-                                              'pos': {'x': 24.597, 'y': 0.01, 'z': -13.444}}]},
-            'F3_Bedroom_7': {'receptacles': [{'name': 'Table', 'feature': 'brown',
-                                              'pos': {'x': 13.58, 'y': 0.01, 'z': -35.59}},
-                                             {'name': 'Bed', 'feature': 'dark colored',
-                                              'pos': {'x': 14.683, 'y': 0.01, 'z': -36.024}}]},
-            'F3_Bedroom_6': {'receptacles': [{'name': 'Table', 'feature': 'decorative',
-                                              'pos': {'x': 25.7, 'y': 0.01, 'z': -36.938}},
-                                             {'name': 'Bed', 'feature': 'contemporary',
-                                              'pos': {'x': 24.597, 'y': 0.01, 'z': -36.504}}]},
-            'F3_ConferenceRoom': {'receptacles': [
-                {'name': 'Meeting Table Large', 'feature': 'elongated',
-                 'pos': {'x': 4.88, 'y': 0.0, 'z': -5.752}}]}, 'F3_Bedroom_1': {'receptacles': [
-                {'name': 'Table', 'feature': 'rectangular', 'pos': {'x': 13.58, 'y': 0.01, 'z': -12.53}},
-                {'name': 'Bed', 'feature': 'tidy', 'pos': {'x': 14.683, 'y': 0.01, 'z': -12.964}}]}, 'F3_Bedroom_11': {
-                'receptacles': [{'name': 'Table', 'feature': 'wooden', 'pos': {'x': 13.58, 'y': 0.01, 'z': -50.962}},
-                                {'name': 'Bed', 'feature': 'dark', 'pos': {'x': 14.683, 'y': 0.01, 'z': -51.396}}]},
-            'F3_Bedroom_8': {'receptacles': [{'name': 'Table', 'feature': 'personal',
-                                              'pos': {'x': 25.7, 'y': 0.01, 'z': -44.62}},
-                                             {'name': 'Bed', 'feature': 'single',
-                                              'pos': {'x': 24.597, 'y': 0.01, 'z': -44.186}}]},
-            'F2_HallRoom01': {'receptacles': [{'name': 'Polygon Table', 'feature': '',
-                                               'pos': {'x': 12.727, 'y': -5.167, 'z': -5.639}}]},
-            'F2_MedicalRoom03': {'receptacles': [{'name': 'Desk 4', 'feature': '',
-                                                  'pos': {'x': -13.347, 'y': -5.172,
-                                                          'z': -6.917}}]}, 'F3_OfficeRoom02': {
-                'receptacles': [{'name': 'Desk 3', 'feature': 'office', 'pos': {'x': -6.415, 'y': 0.0, 'z': -6.654}}]},
-            'F3_Bedroom_10': {'receptacles': [{'name': 'Table', 'feature': 'wooden',
-                                               'pos': {'x': 25.7, 'y': 0.01, 'z': -52.31}},
-                                              {'name': 'Bed', 'feature': 'square',
-                                               'pos': {'x': 24.597, 'y': 0.01, 'z': -51.876}}]}}
-        self.receptacles_information = receptacles_information
-        self.receptacle_mark(rece)
+        map0 = np.loadtxt('data/semantic_map_0.txt', dtype=int, delimiter='\t')
+        map1 = np.loadtxt('data/semantic_map_1.txt', dtype=int, delimiter='\t')
+        map2 = np.loadtxt('data/semantic_map_2.txt', dtype=int, delimiter='\t')
+        self.sematic_map = [map0, map1, map2]
+        with open('data/semantic_map_tags.json', 'r') as file:
+            self.semantic_tags = json.load(file)
 
-    def receptacle_mark(self, obj_rec):
-        recp = []
-        for rec in obj_rec:
-            id = rec['itemId']
-            obj = self.objects[id]
-            name, id = obj['itemName'], obj['itemId']
-            position = obj['position']
-            lis = rec['receptacleBounds']
-            x_max, x_min = lis[0]['x'], lis[0]['x']
-            z_max, z_min = lis[0]['z'], lis[0]['z']
-            for item in lis:
-                x_max = max(x_max, item['x'])
-                x_min = min(x_min, item['x'])
-                z_max = max(z_max, item['z'])
-                z_min = min(z_min, item['z'])
-            recp.append({'name': name, 'id': id, 'x_max': x_max, 'y': lis[0]['y'],
-                         'x_min': x_min, 'z_max': z_max, 'z_min': z_min, 'position': position})
-        self.receptacles = recp
 
     def point_determine(self, pos):
         point_P = {}
@@ -736,46 +556,6 @@ def cleanup_function(stop_event):
     # stop the loop
 
 
-def agent_plan(server, agent):
-    agent.get_all_map()
-    p, information = agent.pos_query()
-    ob = agent.observation_camera_head()
-    return 1
-    flo, xx, yy, is_o = server.maps.get_point_info((20.9, 1, -44))
-    print(flo, xx, yy, is_o)
-    print(server.maps.maps_info[0]['x0'], server.maps.maps_info[0]['z0'])
-    # server.maps.draw(19.2, 1, -44)
-    des = agent.move_to(4)
-    flo, xx, yy, is_o = server.maps.get_point_info(des)
-    # agent.navigate(flo, (xx, yy))
-    # Physical navigation
-    # agent.move_forward(0.3)
-    # agent.pos_query()
-    # Robot position request
-
-    # agent.goto_target_goal((18.0, 0.1, -2.99))
-    agent.goto_target_goal((-13.9, 0.1, -7.5))
-    flo, xx, yy, is_o = server.maps.get_point_info((-2.5, 0.1, -2.8))
-    # adjustment
-    flo, xx, yy, is_o = server.maps.get_point_info((-12.8, 0.1, 1.7))
-    rotation_angle = agent.calculate_rotation_angle(xx, yy)
-    # print(information)
-    # print('-+++++++++++++++++++++++=', rotation_angle)
-    # agent.joint_control(5, rotation_angle)
-    # return
-    # agent.rotate_right(rotation_angle)
-    time.sleep(1)
-    # agent.go_to_there((-2.0, 0.1, 0))
-    # agent.go_to_there((12.5, 0.1, 0))
-    # agent.goto_target_goal((27.0, 0.1, -2.99))
-    agent.ik_control()
-    time.sleep(2)
-    agent.goto_target_goal((3.38, 0.1, 5.99))
-    # Item location information
-#       {"requestIndex":10,"actionId":6,"result":1,"positionOffset":0.0,"directionOffset":0.0}
-# def server_initialization(output_queue):
-
-
 class DevNull:
     def write(self, msg):
         pass
@@ -829,7 +609,6 @@ class PrsEnv(object):
         # --------------agent begin---------------
         self.agent = Agent(self.server, self.env_time, self.objs_data)
         # agent_thread = threading.Thread(target=agent_plan, args=(self.server, self.agent))
-        # 启动线程 机器人
         self.agent.get_all_map()
         # agent_thread.start()
         # ----------------------- npc coming----------------------
@@ -943,10 +722,6 @@ class PrsEnv(object):
                     continue
                 # npc.random_behavior(task_setup['npc_location'], 1)
         self.npcs[target_npc_id].directive_following(task_setup)
-        #     此处生成任务指令和数据
-        instructions = [
-            'Grasp the black console gaming pad from the low coffee table in the living room and take it to the bedroom.',
-            'Retrieve the black console gaming pad on the low coffee table in the living room and bring it to the bedroom for Brian, the one in the light-colored jacket.']
         basic_information, name_dict = self.npc_data["npc"][target_npc_id]["description"], {
             'name': task_setup['npc_name']}
         npc_information = basic_information.format_map(name_dict)
@@ -1016,7 +791,7 @@ class PrsEnv(object):
         elif hr_dis < 5:
             human_find = 0.5
         res_deliver = human_find * res_grasp
-        #   计算距离，判断手上物品，计算时间
+        #   Calculate distance, determine items in hand, and calculate time
         task_res = res_grasp + res_find + res_deliver + human_find
         task_result = {'sub_result': {'grasp': res_grasp, 'object_find': res_find,
                                       'deliver': res_deliver, 'human_find': human_find},
