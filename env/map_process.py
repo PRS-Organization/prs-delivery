@@ -2,6 +2,7 @@ import json
 import matplotlib.pyplot as plt
 import numpy as np
 import copy
+import skfmm
 
 
 class RoomMap(object):
@@ -166,6 +167,49 @@ class RoomMap(object):
         plt.axis('off')
         plt.xticks([])
         plt.yticks([])
+        plt.show()
+
+    def dis_matrix(self, mappp, target_position):
+        map = np.array(mappp)
+        map_copy = copy.deepcopy(map)
+        # mask = np.logical_and(abs(X) < 0.1, abs(Y) < 0.5)
+        # phi = np.ma.MaskedArray(phi, mask)
+        tar_map = np.ones_like(map)
+        tar_map[target_position[0]][target_position[1]] = 0
+        obstacle_map = np.ones_like(map)
+        obstacle_map[map == 1] = 0
+        # for i in range(map.shape[0]):
+        #     for j in range(map.shape[1]):
+        #         if map[i][j] - 1 < 0.1:
+        #             obstacle_map[i][j] = 1
+        print(map[66][198], type(map[66][198]), obstacle_map[0][0], obstacle_map[66][198])
+        # plt.imshow(obstacle_map)
+        # plt.show()
+        bool_map = np.array(obstacle_map, dtype=bool)
+        bool_map = np.ma.MaskedArray(tar_map, bool_map)
+        return skfmm.distance(bool_map)
+
+    def search_route(self, map, current_position, target_position):
+        target_x, target_y = 1, 1
+        map_show = copy.deepcopy(map)
+        dis_matrix = self.dis_matrix(map, target_position)
+        # plt.imshow(map)
+        # plt.show()
+        arrive = 0
+        while not arrive:
+            map_show[current_position[0]][current_position[1]] = -50
+            xx, yy = current_position[0], current_position[1]
+            if dis_matrix[xx][yy] == 0:
+                break
+            min_value, next_x, next_y = 100000, 0, 0
+            for i in range(xx-1, xx+2):
+                for j in range(yy-1, yy+2):
+                    if min_value > dis_matrix[i][j]:
+                        min_value, next_x, next_y = dis_matrix[i][j], i, j
+            current_position = (next_x, next_y)
+            # break
+        plt.imshow(map_show)
+        plt.axis('off')
         plt.show()
 
 '''

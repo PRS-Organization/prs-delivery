@@ -438,7 +438,7 @@ class ObjectsData(object):
         with open('unity/PRS_Data/StreamingAssets/itemInfo.json', 'r') as file:
             json_data = json.load(file)
         with open('data/map_room_data.json', 'r') as file:
-            room_data= json.load(file)
+            room_data = json.load(file)
         with open('data/map_receptacle_data.json.json', 'r') as file:
             self.room_receptacles = json.load(file)
         with open('unity/PRS_Data/StreamingAssets/segmentationTagColorInfo.json', 'r') as file:
@@ -465,9 +465,18 @@ class ObjectsData(object):
             data = json.loads(json_i)
             env_objects.append(data)
         env_rooms = []
-        # for json_i in room_data.items():
-        #     data = json.loads(json_i)
-        #     env_rooms.append(data)
+        for floor_i in room_data:
+            for identifier, room_data in room_data[floor_i].items():
+                room_information = dict()
+                room_name = room_names[floor_i][identifier]
+                room_information['name'] = room_name
+                room_information['floor'] = int(floor_i)
+                x, y = abs(room_data['x'][1] - room_data['x'][0]) / 2, abs(room_data['y'][1] - room_data['y'][0])
+                room_information['position'] = (floor_i, x, y)
+                room_information['x'], room_information['y'] = room_data['x'], room_data['y']
+                room_information['id'] = identifier
+                room_information['semantic_name'] = floor_i + '_' + room_name
+                env_rooms.append(room_information)
 
         self.objects = env_objects
         self.room_area = env_rooms
@@ -482,19 +491,21 @@ class ObjectsData(object):
         with open('data/semantic_map_tags.json', 'r') as file:
             self.semantic_tags = json.load(file)
 
-
     def point_determine(self, pos):
-        point_P = {}
+        # position not world coordinates, pos: [x, y, z], z is floor
+        point_P = dict()
         try:
             point_P['x'], point_P['y'], point_P['z'] = pos['x'], pos['y'], pos['z']
         except:
             point_P['x'], point_P['y'], point_P['z'] = pos[0], pos[1], pos[2]
         res = None
         for room_i in self.room_area:
+            if round(point_P['z']) != round(room_i['floor']):
+                continue
             if (room_i['x'][0] <= point_P['x'] <= room_i['x'][1]) and (
-                    room_i['z'][0] <= point_P['z'] <= room_i['z'][1]):
-                if abs(point_P['y']-room_i['y']) < 3:
-                    res = room_i['name']
+                    room_i['y'][0] <= point_P['y'] <= room_i['y'][1]):
+                if abs(point_P['z']-room_i['floor']) < 1:
+                    res = room_i['semantic_name']
         return res
 
     def object_parsing(self, ins, target=['Chair','Stool']):

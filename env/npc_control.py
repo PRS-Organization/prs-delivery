@@ -24,40 +24,34 @@ def random_number(n):
     selected_number = np.random.randint(0, n)  # Generate a random number within the interval [0, n-1]
     return selected_number
 
+
 class Env(object):
-    def __init__(self):
+    def __init__(self, data, maps):
+        self.data = data
+        self.maps = maps
         self.height_f1 = -16.693447
         self.height_f2 = -5.2174
         self.height_f3 = -0.0499999
         f1, f2, f3 = self.height_f1, self.height_f2, self.height_f3
-        self.location = {
-            "F1_EnergyRoom": [(21.65, -16.4, -24.8), (11.5, -16.4, -36.5)],
-            "F1_ConveyorRoom": [(-0.4, -16.4, -2.8), (9.1, -16.4, -2.9)],
-            "F1_StorageRoom01": [(10.4, -16.4, -54.1), (10.1, -16.4, -46.3)],
-            "F1_StorageRoom02": [(1.5, -16.4, -14.1), (9.5, -16.4, -26.5)],
-            "F2_LabRoom01": [(14.5, -5.1, 4.1), (14.4, -5.1, 7.3)],
-            "F2_LabRoom02": [(4.8, -5.1, 3.9), (5.1, -5.1, 7.1)],
-            "F2_LabRoom03": [(-4.9, -5.1, 3.5), (-3.4, -5.1, 6.2)],
-            "F2_Restroom": [(-15.2, -5.1, 2.2), (-15.9, -5.1, 3.5)],
-            "F2_WarmRoom": [(15.7, -5.1, -19.5), (15.4, -5.1, -17.1)],
-            "F2_StorageRoom": [(-11.9, -5.1, 1.7), (-13.4, -5.1, 1.9)],
-            "F2_ServerRoom": [(15.6, -5.1, -12.1), (14.5, -5.1, -13.1)],
-            "F2_MedicalRoom01": [(4.8, -5.1, -3.2), (3.6, -5.1, -5.9)],
-            "F2_MedicalRoom02": [(-4.9, -5.1, -3.6), (-8.5, -5.1, -6.8)],
-            "F2_MedicalRoom03": [(-12.4, -5.1, -3.7), (-11.5, -5.1, -6.7)],
-            # "F3_Bedroom": [(, 0.1,), (, 0.1,)],
-            "F3_GymRoom": [(14.7, 0.1, 3.3), (17.7, 0.1, 4.4)],
-            "F3_OfficeRoom01": [(-2.1, 0.1, -3.4), (-2.3, 0.1, -7.6)],
-            "F3_OfficeRoom02": [(-7.2, 0.1, -3.3), (-7.8, 0.1, -7.1)],
-            "F3_RestRoom": [(-15.5, 0.1, 2.8), (-15.9, 0.1, 3.8)],
-            "F3_OfficeSpaceRoom": [(4.9, 0.1, 3.2), (3.3, 0.1, 6.1)],
-            "F3_KitchenRoom": [(-14.7, 0.1, -3.2), (-15.9, 0.1, -6.9)],
-            "F3_StorageRoom": [(-11.8, 0.1, 2.7), (-13.4, 0.1, 2.1)],
-            "F3_LivingRoom": [(-4.9, 0.1, 3.3), (-3.1, 0.1, 8.1)],
-            "F3_ConferenceRoom": [(4.9, 0.1, -3.2), (1.5, 0.1, -4.6)]
+        self.location = dict()
+        self.room_process()
 
-        }
-
+    def room_process(self):
+        for room in self.data.room_area:
+            starting_coordinates = (0, self.maps[room['floor']], 0)
+            ind, p_i, p_j, _ = self.maps.get_point_info(starting_coordinates)
+            room_map = self.maps.maps_info[room['floor']]['grid']
+            dis_matrix = self.maps.dis_matrix(room_map, (p_i, p_j))
+            # self.maps.search_route(room_map, (66, 198), (130, 132))
+            minimum, position_i, position_j = 999999, 0, 0
+            for i in range(room['x'][0], room['x'][1]+1):
+                for j in range(room['y'][0], room['y'][1]+1):
+                    if dis_matrix[i][j] < minimum:
+                        position_i, position_j = i, j
+            # location information: (floor, map_i, map_j)
+            self.location[room['semantic_name']] = [(room['floor'], position_i, position_j)
+                                                    , (room['floor'], room['position'])]
+            
     def calculate_distance(self, point1, point2):
         # NumPy array
         try:
@@ -80,9 +74,9 @@ class Npc(object):
     def __init__(self, person_id, sock, env_time, objects):
         self.object_data = objects
         self.person_id = person_id
-        self.env = Env()
         self.times = env_time
         self.server = sock
+        self.env = Env(self.object_data, self.server.maps)
         self.running = 1
         self.action_state = 'stand'
         self.place_state = 'warehouse'
@@ -502,8 +496,8 @@ class Agent(object):
         self.is_grasp = None
         self.robot = PRS_IK()
         # robot ik algorithm
-        self.env = Env()
         self.server = sock
+        self.env = Env(self.object_data, self.server.maps)
         self.agent_state = 1
         self.current_info = None
         self.check_for_MLLM = None
