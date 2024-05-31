@@ -667,14 +667,20 @@ class Agent(object):
         dis = np.sqrt((point1[0] - point2[0])**2 + (point1[1] - point2[1])**2)
         return dis
 
-    def goto_receptacle(self, room='F3_KitchenRoom', recepacle=0, random=0):
-        room_receptacle = self.object_data.room_receptacles[room]['receptacles'][recepacle]
+    def goto_receptacle(self, room='kitchen room', recepacle=0, random=0):
+        room_info = None
+        for room_i in self.object_data.room_area:
+            if room_i['name'] == room:
+                room_info = room_i
+                break
+        if room_info is None: return None
+        room_receptacle = room_info['receptacles'][recepacle]
         pos, info = self.pos_query()
         floor_robot, robot_i, robot_j = self.map_position_agent['floor'], self.map_position_agent['x'], self.map_position_agent['y']
         floor_receptacle, rec_i, rec_j, _ = self.server.maps.get_point_info(room_receptacle['position'])
         if floor_receptacle != floor_receptacle:
             print('robot and receptacle is not the same floor !')
-            return 0,0
+            return 0, 0
         width = abs(room_receptacle['map_i_max'] - room_receptacle['map_i_min'])
         length = abs(room_receptacle['map_j_max'] - room_receptacle['map_j_min'])
         scale = self.server.maps.maps_info[floor_robot]['scale']
