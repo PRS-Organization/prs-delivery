@@ -600,13 +600,17 @@ class Agent(object):
                     except:
                         pass
                     if target_id is None: return 0
+                if target_id is None: return 0
                 if is_npc:
                     pos, tar_obj_info = self.npcs[target_id].query_information()
                 else:
                     tar_obj_info = self.object_information_query(obj_id=target_id)
                     if not tar_obj_info: return 0
                 if manipulaton == 1:
-                    if "Grabable" not in tar_obj_info['features']: continue
+                    try:
+                        if "Grabable" not in tar_obj_info['features']: continue
+                    except:
+                        return 0
                     pos, info = self.pos_query()
                     if self.env.calculate_distance(tar_obj_info['position'], pos) > 3.0:
                         return 0
