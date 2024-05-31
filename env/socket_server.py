@@ -440,7 +440,7 @@ class ObjectsData(object):
         with open('data/map_room_data.json', 'r') as file:
             room_data = json.load(file)
         with open('data/map_receptacle_data.json.json', 'r') as file:
-            self.room_receptacles = json.load(file)
+            receptacles = json.load(file)
         with open('unity/PRS_Data/StreamingAssets/segmentationTagColorInfo.json', 'r') as file:
             seg_tag_data = json.load(file)
         with open('../data/npc_data.json', 'r') as file:
@@ -476,10 +476,13 @@ class ObjectsData(object):
                 room_information['x'], room_information['y'] = room_data['x'], room_data['y']
                 room_information['id'] = identifier
                 room_information['semantic_name'] = floor_i + '_' + room_name
+                room_information['receptacles'] = receptacles[floor_i][identifier]['receptacles']
+                room_information['receptacles_list'] = receptacles[floor_i][identifier]['receptacle_names']
                 env_rooms.append(room_information)
 
         self.objects = env_objects
         self.room_area = env_rooms
+        self.room_receptacles = receptacles
         self.segment_tag = seg_data
         self.rgb_to_id = rgb_id
         self.characters = json_npc['npc']

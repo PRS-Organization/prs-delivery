@@ -51,7 +51,7 @@ class Env(object):
             # location information: (floor, map_i, map_j)
             self.location[room['semantic_name']] = [(room['floor'], position_i, position_j)
                                                     , (room['floor'], room['position'])]
-            
+
     def calculate_distance(self, point1, point2):
         # NumPy array
         try:
@@ -185,7 +185,7 @@ class Npc(object):
             obj_closed = datas['closeRangeItemIds']
         return pos, datas
 
-    def goto_randomly(self, position_tar, radius=1.5, delete_dis=2, times=10):
+    def goto_randomly(self, position_tar, radius=1.5, delete_dis=2, times=10, random=1):
         try:
             xx, yy, zz = position_tar[0], position_tar[1], position_tar[2]
         except:
@@ -201,7 +201,10 @@ class Npc(object):
             if result_go == 1:
                 break
     #         choose a random point (p_i, p_j)
-            now = np.random.randint(0, length)
+            if random:
+                now = np.random.randint(0, length)
+            else:
+                now = 0
             p_i, p_j = point_list[now][0], point_list[now][1]
             # translate the grid pos to the world pos
             pos_i, pos_j = self.server.maps.get_an_aligned_world_coordinate_randomly(floor, p_i, p_j)
@@ -251,7 +254,7 @@ class Npc(object):
                 return 0
             random_key = np.random.choice(list(self.env.location.keys()))
             location_now = self.env.location[random_key]
-            result = self.goto_randomly(location_now[1], 2, 2, 20)
+            result = self.goto_randomly(location_now[1], 3.5, 2, 20)
             if result:
                 res, obj = self.go_to_object('Seat')
                 if res:
@@ -623,7 +626,7 @@ class Agent(object):
                     return res
                 return 0
 
-    def get_room_area(self, target_room='F3_KitchenRoom'):
+    def get_room_area(self, target_room='kitchen room', inflation=1):
         room_info = None
         for room_i in self.object_data.room_area:
             if room_i['name'] == target_room:
@@ -631,30 +634,33 @@ class Agent(object):
                 break
         if room_info is None: return None
         room_accessible_area = []
-        x_max, x_min, z_max, z_min, y = room_info['x'][1], room_info['x'][0], room_info['z'][1], room_info['z'][0], room_info['y']
-        floor, map_i1, map_j1, iso = self.server.maps.get_point_info((x_max, y, z_max))
-        floor, map_i2, map_j2, iso = self.server.maps.get_point_info((x_min, y, z_min))
-        map_i_min, map_i_max = min(map_i1, map_i2), max(map_i1, map_i2)
-        map_j_min, map_j_max = min(map_j1, map_j2), max(map_j1, map_j2)
+        floor = room_info['floor']
+        map_i_min, map_i_max, map_j_min, map_j_max = room_info['x'][0], room_info['x'][1], room_info['y'][0], room_info['y'][1]
         map = copy.deepcopy(self.object_data.sematic_map[floor])
         map = np.array(map)
         for ii in range(map_i_min, map_i_max + 1):
             for jj in range(map_j_min, map_j_max + 1):
                 if map[ii][jj] == 1:
                     close_to_obstacle = False
-                    for iii in range(max(0, ii - 1), min(map.shape[0], ii + 2)):
-                        for jjj in range(max(0, jj - 1), min(map.shape[1], jj + 2)):
-                            if map[iii, jjj] == 0:
-                                close_to_obstacle = True
+                    if inflation:
+                        for iii in range(max(0, ii - 1), min(map.shape[0], ii + 2)):
+                            for jjj in range(max(0, jj - 1), min(map.shape[1], jj + 2)):
+                                if map[iii, jjj] == 0:
+                                    close_to_obstacle = True
+                    else:
+                        close_to_obstacle = True
                     if not close_to_obstacle:
                         room_accessible_area.append((ii, jj))
                         map[ii][jj] = 3
         return room_accessible_area
 
-    def get_receptacles_within_room(self, room_name='F3_KitchenRoom'):
-        room_receptacle = self.object_data.room_receptacles[room_name]['receptacles']
-        room_receptacles = [[i, rec['name']] for i, rec in enumerate(room_receptacle)]
-        # 标注的容器描述和名字，例如黄色的桌子
+    def get_receptacles_within_room(self, room_name='kitchen room'):
+        # room_receptacle = self.object_data.room_receptacles[room_name]['receptacles']
+        # room_receptacles = [[i, rec['name']] for i, rec in enumerate(room_receptacle)]
+        room_receptacles = None
+        for room_i in self.object_data.room_area:
+            if room_i['name'] == room_name:
+                room_receptacles = room_i['receptacles_list']
         return room_receptacles
 
     def calculate_2D_distance(self, point1, point2):
@@ -711,7 +717,7 @@ class Agent(object):
         direction_degree = self.direction_degree
         # degree = info['jointJointTarget']
         camera_direction = - degree + direction_degree
-        print(camera_direction, direction_degree, self.direction_vector)
+        # print(camera_direction, direction_degree, self.direction_vector)
         floor_r, r_i, r_j = self.map_position_agent['floor'], self.map_position_agent['x'], self.map_position_agent['y']
         # FOV field of view = 90, target_degree_view: left -, right +
         camera_direction = camera_direction - target_degree_view
