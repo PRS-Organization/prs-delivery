@@ -2,7 +2,6 @@ from env.socket_server import *
 import matplotlib.pyplot as plt
 # from env.socket_server import server
 # import sys
-# sys.path.append('path_to_env_folder')
 
 if __name__ == '__main__':
     # Environment initialization

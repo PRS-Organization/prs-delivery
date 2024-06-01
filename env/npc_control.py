@@ -35,7 +35,7 @@ class Env(object):
         f1, f2, f3 = self.height_f1, self.height_f2, self.height_f3
         self.location = dict()
         self.room_process()
-        with open('data/room_sampling_points.json', 'w') as file:
+        with open('env/data/room_sampling_points.json', 'w') as file:
             json.dump(self.location, file, indent=4)
 
     def room_process(self):

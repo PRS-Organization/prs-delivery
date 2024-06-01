@@ -10,8 +10,8 @@ import struct
 from enum import Enum
 # from game_demo import *
 import ast
-from map_process import RoomMap
-from npc_control import Npc, Agent
+from env.map_process import RoomMap
+from env.npc_control import Npc, Agent
 import datetime
 import numpy as np
 
@@ -437,15 +437,15 @@ class ObjectsData(object):
     def __init__(self):
         with open('unity/PRS_Data/StreamingAssets/itemInfo.json', 'r') as file:
             json_data = json.load(file)
-        with open('data/map_room_data.json', 'r') as file:
+        with open('env/data/map_room_data.json', 'r') as file:
             room_data = json.load(file)
-        with open('data/map_receptacle_data.json.json', 'r') as file:
+        with open('env/data/map_receptacle_data.json.json', 'r') as file:
             receptacles = json.load(file)
         with open('unity/PRS_Data/StreamingAssets/segmentationTagColorInfo.json', 'r') as file:
             seg_tag_data = json.load(file)
-        with open('../data/npc_data.json', 'r') as file:
+        with open('env/data/npc_data.json', 'r') as file:
             json_npc = json.load(file)
-        with open('data/room_mapping.json.json', 'r') as file:
+        with open('env/data/room_mapping.json.json', 'r') as file:
             room_names = json.load(file)
         # decode JSON
         seg_data = []
@@ -487,9 +487,9 @@ class ObjectsData(object):
         self.rgb_to_id = rgb_id
         self.characters = json_npc['npc']
         self.room_receptacles = None
-        map0 = np.loadtxt('data/semantic_map_0.txt', dtype=int, delimiter='\t')
-        map1 = np.loadtxt('data/semantic_map_1.txt', dtype=int, delimiter='\t')
-        map2 = np.loadtxt('data/semantic_map_2.txt', dtype=int, delimiter='\t')
+        map0 = np.loadtxt('env/data/semantic_map_0.txt', dtype=int, delimiter='\t')
+        map1 = np.loadtxt('env/data/semantic_map_1.txt', dtype=int, delimiter='\t')
+        map2 = np.loadtxt('env/data/semantic_map_2.txt', dtype=int, delimiter='\t')
         self.sematic_map = [map0, map1, map2]
         with open('data/semantic_map_tags.json', 'r') as file:
             self.semantic_tags = json.load(file)
@@ -642,7 +642,7 @@ class PrsEnv(object):
         self.npcs = [npc_0, npc_1, npc_2, npc_3, npc_4, npc_5, npc_6, npc_7, npc_8, npc_9]
         self.agent.npcs = self.npcs
         self.receptacle_mark()
-        with open('../data/npc_data.json', 'r') as file:
+        with open('env/data/npc_data.json', 'r') as file:
             npc_data = json.load(file)
         self.npc_data = npc_data
         time.sleep(0.1)
