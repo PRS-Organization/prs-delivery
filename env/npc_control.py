@@ -34,13 +34,13 @@ class Env(object):
         self.height_f3 = -0.0499999
         f1, f2, f3 = self.height_f1, self.height_f2, self.height_f3
         self.location = dict()
-        self.room_process()
-        with open('env/data/room_sampling_points.json', 'w') as file:
-            json.dump(self.location, file, indent=4)
+        # self.room_process()
+        with open('env/data/room_sampling_points.json', 'r') as file:
+            self.location  = json.load(file)
 
     def room_process(self):
         for room in self.data.room_area:
-            starting_coordinates = (0, self.maps[room['floor']], 0)
+            starting_coordinates = (0, self.maps.floors[room['floor']], 0)
             ind, p_i, p_j, _ = self.maps.get_point_info(starting_coordinates)
             room_map = self.maps.maps_info[room['floor']]['grid']
             dis_matrix = self.maps.dis_matrix(room_map, (p_i, p_j))
@@ -49,10 +49,11 @@ class Env(object):
             for i in range(room['x'][0], room['x'][1]+1):
                 for j in range(room['y'][0], room['y'][1]+1):
                     if dis_matrix[i][j] < minimum:
+                        minimum = dis_matrix[i][j]
                         position_i, position_j = i, j
             # location information: (floor, map_i, map_j)
             self.location[room['semantic_name']] = [(room['floor'], position_i, position_j)
-                                                    , (room['floor'], room['position'])]
+                                                    , (room['position'][0], room['position'][1], room['position'][2])]
 
     def calculate_distance(self, point1, point2):
         # NumPy array
@@ -687,16 +688,28 @@ class Agent(object):
         if floor_receptacle != floor_receptacle:
             print('robot and receptacle is not the same floor !')
             return 0, 0
-        width = abs(room_receptacle['map_i_max'] - room_receptacle['map_i_min'])
-        length = abs(room_receptacle['map_j_max'] - room_receptacle['map_j_min'])
+        width = abs(room_receptacle['x'][1] - room_receptacle['x'][0])
+        length = abs(room_receptacle['y'][1] - room_receptacle['y'][0])
+
         scale = self.server.maps.maps_info[floor_robot]['scale']
-        ob_distance = np.sqrt(width**2+length**2)*1.0
+        ob_distance = np.sqrt(width ** 2 + length ** 2) * 1.5
         free_area = self.get_room_area(room)
-        reasonable_points = []
-        for po in free_area:
-            if self.calculate_2D_distance(po, (rec_i, rec_j)) < ob_distance:
-                reasonable_points.append(po)
-        if len(reasonable_points) == 0: return 0, 0
+        reasonable_points, ob_time = [], 6
+        for n in range(ob_time):
+            ob_distance -= (ob_distance / ob_time)
+            reasonable_points = []
+            for po in free_area:
+                if self.calculate_2D_distance(po, (rec_i, rec_j)) < ob_distance:
+                    reasonable_points.append(po)
+            if len(reasonable_points) > 0:
+                break
+            else:
+                print(ob_distance)
+        if len(reasonable_points) == 0:
+            # print(room_receptacle['position'])
+            print('there is no space to observer')
+            res = self.goto_target_goal((floor_robot, rec_i, rec_j), radius=2.5, delete_dis=1, position_mode=1)
+            return res, 0
         distances = [np.sqrt((i - robot_i) ** 2 + (j - robot_j) ** 2) for i, j in reasonable_points]
         sorted_valid_points = [point for _, point in sorted(zip(distances, reasonable_points))]
         target_point = sorted_valid_points[0]
@@ -704,8 +717,10 @@ class Agent(object):
         if random:
             random_i = np.random.randint(0, len(reasonable_points))
             target_point = reasonable_points[random_i]
-        res = self.goto_target_goal((floor_robot, target_point[0], target_point[1]), radius=1, delete_dis=1, position_mode=1)
+        res = self.goto_target_goal((floor_robot, target_point[0], target_point[1]), radius=1.5, delete_dis=1,
+                                    position_mode=1)
         if res:
+            # print(res, room_receptacle['position'])
             self.head_camera_look_at(room_receptacle['position'], accuracy=1)
         return res, room_receptacle
 
@@ -1290,10 +1305,15 @@ class Agent(object):
             xx, yy = position['x'], position['z']
         except:
             xx, yy = position[0], position[2]
+        # if world_position and accuracy == 0:
+        #     flo, xx, yy, is_o = self.server.maps.get_point_info(position)
         self.pos_query()
         rotation_angle = self.calculate_rotation_angle(xx, yy, accuracy=accuracy)
+        # print(rotation_angle)
         result = self.rotate_right(rotation_angle)
-        # result = self.joint_control(14, rotation_angle)
+        self.pos_query()
+        rotation_angle = self.calculate_rotation_angle(xx, yy, accuracy)
+        result = self.joint_control(5, rotation_angle)
         return result
 
     def direction_adjust(self, position, pos_input=0, accuracy=1):

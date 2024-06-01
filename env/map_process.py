@@ -178,13 +178,6 @@ class RoomMap(object):
         tar_map[target_position[0]][target_position[1]] = 0
         obstacle_map = np.ones_like(map)
         obstacle_map[map == 1] = 0
-        # for i in range(map.shape[0]):
-        #     for j in range(map.shape[1]):
-        #         if map[i][j] - 1 < 0.1:
-        #             obstacle_map[i][j] = 1
-        print(map[66][198], type(map[66][198]), obstacle_map[0][0], obstacle_map[66][198])
-        # plt.imshow(obstacle_map)
-        # plt.show()
         bool_map = np.array(obstacle_map, dtype=bool)
         bool_map = np.ma.MaskedArray(tar_map, bool_map)
         return skfmm.distance(bool_map)

@@ -4,26 +4,18 @@
         "room10": {
             "receptacles": [
                 {
-                    "name": "reception counter",
-                    "x": [
-                        136,
-                        139
-                    ],
-                    "y": [
-                        208,
-                        225
-                    ],
-                    "floor": 1
-                },
-                {
                     "name": "table",
                     "x": [
-                        156,
-                        158
+                        152,
+                        154
                     ],
                     "y": [
-                        215,
-                        219
+                        213,
+                        215
+                    ],
+                    "position": [
+                        153,
+                        214
                     ],
                     "floor": 1
                 },
@@ -37,6 +29,26 @@
                         212,
                         214
                     ],
+                    "position": [
+                        161,
+                        213
+                    ],
+                    "floor": 1
+                },
+                {
+                    "name": "reception counter",
+                    "x": [
+                        136,
+                        139
+                    ],
+                    "y": [
+                        208,
+                        225
+                    ],
+                    "position": [
+                        138,
+                        216
+                    ],
                     "floor": 1
                 },
                 {
@@ -49,25 +61,33 @@
                         220,
                         222
                     ],
+                    "position": [
+                        161,
+                        221
+                    ],
                     "floor": 1
                 },
                 {
                     "name": "table",
                     "x": [
-                        152,
-                        154
+                        156,
+                        158
                     ],
                     "y": [
-                        213,
-                        215
+                        215,
+                        219
+                    ],
+                    "position": [
+                        157,
+                        217
                     ],
                     "floor": 1
                 }
             ],
             "receptacle_names": [
+                "table",
+                "table",
                 "reception counter",
-                "table",
-                "table",
                 "table",
                 "table"
             ]
@@ -81,8 +101,12 @@
                         159
                     ],
                     "y": [
-                        171,
-                        174
+                        179,
+                        182
+                    ],
+                    "position": [
+                        156,
+                        180
                     ],
                     "floor": 1
                 },
@@ -93,8 +117,12 @@
                         159
                     ],
                     "y": [
-                        179,
-                        182
+                        171,
+                        174
+                    ],
+                    "position": [
+                        156,
+                        172
                     ],
                     "floor": 1
                 }
@@ -116,6 +144,10 @@
                         176,
                         183
                     ],
+                    "position": [
+                        109,
+                        180
+                    ],
                     "floor": 1
                 }
             ],
@@ -135,6 +167,10 @@
                         171,
                         179
                     ],
+                    "position": [
+                        22,
+                        175
+                    ],
                     "floor": 1
                 }
             ],
@@ -144,29 +180,219 @@
         }
     },
     "2": {
+        "room19": {
+            "receptacles": [
+                {
+                    "name": "desk",
+                    "x": [
+                        71,
+                        74
+                    ],
+                    "y": [
+                        207,
+                        214
+                    ],
+                    "position": [
+                        72,
+                        210
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "desk",
+                    "x": [
+                        88,
+                        91
+                    ],
+                    "y": [
+                        220,
+                        227
+                    ],
+                    "position": [
+                        90,
+                        224
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "desk",
+                    "x": [
+                        71,
+                        74
+                    ],
+                    "y": [
+                        220,
+                        227
+                    ],
+                    "position": [
+                        72,
+                        224
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "desk",
+                    "x": [
+                        91,
+                        95
+                    ],
+                    "y": [
+                        207,
+                        214
+                    ],
+                    "position": [
+                        93,
+                        210
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "desk",
+                    "x": [
+                        74,
+                        78
+                    ],
+                    "y": [
+                        207,
+                        214
+                    ],
+                    "position": [
+                        76,
+                        210
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "desk",
+                    "x": [
+                        74,
+                        78
+                    ],
+                    "y": [
+                        220,
+                        227
+                    ],
+                    "position": [
+                        76,
+                        224
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "desk",
+                    "x": [
+                        91,
+                        95
+                    ],
+                    "y": [
+                        220,
+                        227
+                    ],
+                    "position": [
+                        93,
+                        224
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "desk",
+                    "x": [
+                        88,
+                        91
+                    ],
+                    "y": [
+                        207,
+                        214
+                    ],
+                    "position": [
+                        90,
+                        210
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "side table",
+                    "x": [
+                        81,
+                        84
+                    ],
+                    "y": [
+                        212,
+                        223
+                    ],
+                    "position": [
+                        82,
+                        218
+                    ],
+                    "floor": 2
+                }
+            ],
+            "receptacle_names": [
+                "desk",
+                "desk",
+                "desk",
+                "desk",
+                "desk",
+                "desk",
+                "desk",
+                "desk",
+                "side table"
+            ]
+        },
+        "room17": {
+            "receptacles": [
+                {
+                    "name": "desk",
+                    "x": [
+                        40,
+                        50
+                    ],
+                    "y": [
+                        172,
+                        180
+                    ],
+                    "position": [
+                        45,
+                        176
+                    ],
+                    "floor": 2
+                }
+            ],
+            "receptacle_names": [
+                "desk"
+            ]
+        },
         "room0": {
             "receptacles": [
                 {
                     "name": "table",
                     "x": [
-                        153,
-                        161
+                        103,
+                        111
                     ],
                     "y": [
-                        112,
-                        114
+                        92,
+                        93
+                    ],
+                    "position": [
+                        107,
+                        92
                     ],
                     "floor": 2
                 },
                 {
                     "name": "bed",
                     "x": [
-                        145,
-                        152
+                        112,
+                        119
                     ],
                     "y": [
-                        98,
-                        106
+                        100,
+                        107
+                    ],
+                    "position": [
+                        116,
+                        104
                     ],
                     "floor": 2
                 }
@@ -185,8 +411,12 @@
                         161
                     ],
                     "y": [
-                        138,
-                        140
+                        112,
+                        114
+                    ],
+                    "position": [
+                        157,
+                        113
                     ],
                     "floor": 2
                 },
@@ -197,8 +427,12 @@
                         152
                     ],
                     "y": [
-                        124,
-                        131
+                        98,
+                        106
+                    ],
+                    "position": [
+                        148,
+                        102
                     ],
                     "floor": 2
                 }
@@ -213,24 +447,32 @@
                 {
                     "name": "table",
                     "x": [
-                        153,
-                        161
+                        103,
+                        111
                     ],
                     "y": [
-                        35,
-                        37
+                        66,
+                        68
+                    ],
+                    "position": [
+                        107,
+                        67
                     ],
                     "floor": 2
                 },
                 {
                     "name": "bed",
                     "x": [
-                        145,
-                        152
+                        112,
+                        119
                     ],
                     "y": [
-                        21,
-                        29
+                        74,
+                        82
+                    ],
+                    "position": [
+                        116,
+                        78
                     ],
                     "floor": 2
                 }
@@ -245,12 +487,56 @@
                 {
                     "name": "table",
                     "x": [
+                        153,
+                        161
+                    ],
+                    "y": [
+                        163,
+                        165
+                    ],
+                    "position": [
+                        157,
+                        164
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "bed",
+                    "x": [
+                        145,
+                        152
+                    ],
+                    "y": [
+                        149,
+                        157
+                    ],
+                    "position": [
+                        148,
+                        153
+                    ],
+                    "floor": 2
+                }
+            ],
+            "receptacle_names": [
+                "table",
+                "bed"
+            ]
+        },
+        "room4": {
+            "receptacles": [
+                {
+                    "name": "table",
+                    "x": [
                         103,
                         111
                     ],
                     "y": [
-                        15,
-                        17
+                        117,
+                        119
+                    ],
+                    "position": [
+                        107,
+                        118
                     ],
                     "floor": 2
                 },
@@ -261,8 +547,143 @@
                         119
                     ],
                     "y": [
-                        23,
-                        30
+                        126,
+                        133
+                    ],
+                    "position": [
+                        116,
+                        130
+                    ],
+                    "floor": 2
+                }
+            ],
+            "receptacle_names": [
+                "table",
+                "bed"
+            ]
+        },
+        "room16": {
+            "receptacles": [
+                {
+                    "name": "table",
+                    "x": [
+                        160,
+                        162
+                    ],
+                    "y": [
+                        212,
+                        214
+                    ],
+                    "position": [
+                        161,
+                        213
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "table",
+                    "x": [
+                        152,
+                        154
+                    ],
+                    "y": [
+                        213,
+                        215
+                    ],
+                    "position": [
+                        153,
+                        214
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "reception counter",
+                    "x": [
+                        136,
+                        139
+                    ],
+                    "y": [
+                        208,
+                        225
+                    ],
+                    "position": [
+                        138,
+                        216
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "table",
+                    "x": [
+                        156,
+                        158
+                    ],
+                    "y": [
+                        215,
+                        219
+                    ],
+                    "position": [
+                        157,
+                        217
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "table",
+                    "x": [
+                        160,
+                        162
+                    ],
+                    "y": [
+                        220,
+                        222
+                    ],
+                    "position": [
+                        161,
+                        221
+                    ],
+                    "floor": 2
+                }
+            ],
+            "receptacle_names": [
+                "table",
+                "table",
+                "reception counter",
+                "table",
+                "table"
+            ]
+        },
+        "room5": {
+            "receptacles": [
+                {
+                    "name": "table",
+                    "x": [
+                        153,
+                        161
+                    ],
+                    "y": [
+                        61,
+                        63
+                    ],
+                    "position": [
+                        157,
+                        62
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "bed",
+                    "x": [
+                        145,
+                        152
+                    ],
+                    "y": [
+                        47,
+                        54
+                    ],
+                    "position": [
+                        148,
+                        50
                     ],
                     "floor": 2
                 }
@@ -284,314 +705,9 @@
                         171,
                         179
                     ],
-                    "floor": 2
-                }
-            ],
-            "receptacle_names": [
-                "desk"
-            ]
-        },
-        "room16": {
-            "receptacles": [
-                {
-                    "name": "table",
-                    "x": [
-                        156,
-                        158
-                    ],
-                    "y": [
-                        215,
-                        219
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "table",
-                    "x": [
-                        152,
-                        154
-                    ],
-                    "y": [
-                        213,
-                        215
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "table",
-                    "x": [
-                        160,
-                        162
-                    ],
-                    "y": [
-                        220,
-                        222
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "reception counter",
-                    "x": [
-                        136,
-                        139
-                    ],
-                    "y": [
-                        208,
-                        225
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "table",
-                    "x": [
-                        160,
-                        162
-                    ],
-                    "y": [
-                        212,
-                        214
-                    ],
-                    "floor": 2
-                }
-            ],
-            "receptacle_names": [
-                "table",
-                "table",
-                "table",
-                "reception counter",
-                "table"
-            ]
-        },
-        "room19": {
-            "receptacles": [
-                {
-                    "name": "side table",
-                    "x": [
-                        81,
-                        84
-                    ],
-                    "y": [
-                        212,
-                        223
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "desk",
-                    "x": [
-                        88,
-                        91
-                    ],
-                    "y": [
-                        220,
-                        227
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "desk",
-                    "x": [
-                        71,
-                        74
-                    ],
-                    "y": [
-                        207,
-                        214
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "desk",
-                    "x": [
-                        91,
-                        95
-                    ],
-                    "y": [
-                        220,
-                        227
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "desk",
-                    "x": [
-                        74,
-                        78
-                    ],
-                    "y": [
-                        207,
-                        214
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "desk",
-                    "x": [
-                        71,
-                        74
-                    ],
-                    "y": [
-                        220,
-                        227
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "desk",
-                    "x": [
-                        88,
-                        91
-                    ],
-                    "y": [
-                        207,
-                        214
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "desk",
-                    "x": [
-                        74,
-                        78
-                    ],
-                    "y": [
-                        220,
-                        227
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "desk",
-                    "x": [
-                        91,
-                        95
-                    ],
-                    "y": [
-                        207,
-                        214
-                    ],
-                    "floor": 2
-                }
-            ],
-            "receptacle_names": [
-                "side table",
-                "desk",
-                "desk",
-                "desk",
-                "desk",
-                "desk",
-                "desk",
-                "desk",
-                "desk"
-            ]
-        },
-        "room22": {
-            "receptacles": [
-                {
-                    "name": "dinner counter",
-                    "x": [
+                    "position": [
                         54,
-                        57
-                    ],
-                    "y": [
-                        212,
-                        223
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "coffee table",
-                    "x": [
-                        42,
-                        45
-                    ],
-                    "y": [
-                        216,
-                        221
-                    ],
-                    "floor": 2
-                }
-            ],
-            "receptacle_names": [
-                "dinner counter",
-                "coffee table"
-            ]
-        },
-        "room4": {
-            "receptacles": [
-                {
-                    "name": "table",
-                    "x": [
-                        103,
-                        111
-                    ],
-                    "y": [
-                        66,
-                        68
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "bed",
-                    "x": [
-                        112,
-                        119
-                    ],
-                    "y": [
-                        74,
-                        82
-                    ],
-                    "floor": 2
-                }
-            ],
-            "receptacle_names": [
-                "table",
-                "bed"
-            ]
-        },
-        "room5": {
-            "receptacles": [
-                {
-                    "name": "table",
-                    "x": [
-                        153,
-                        161
-                    ],
-                    "y": [
-                        86,
-                        88
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "bed",
-                    "x": [
-                        145,
-                        152
-                    ],
-                    "y": [
-                        73,
-                        80
-                    ],
-                    "floor": 2
-                }
-            ],
-            "receptacle_names": [
-                "table",
-                "bed"
-            ]
-        },
-        "room17": {
-            "receptacles": [
-                {
-                    "name": "desk",
-                    "x": [
-                        40,
-                        50
-                    ],
-                    "y": [
-                        172,
-                        180
+                        175
                     ],
                     "floor": 2
                 }
@@ -609,8 +725,132 @@
                         111
                     ],
                     "y": [
+                        15,
+                        17
+                    ],
+                    "position": [
+                        107,
+                        16
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "bed",
+                    "x": [
+                        112,
+                        119
+                    ],
+                    "y": [
+                        23,
+                        30
+                    ],
+                    "position": [
+                        116,
+                        26
+                    ],
+                    "floor": 2
+                }
+            ],
+            "receptacle_names": [
+                "table",
+                "bed"
+            ]
+        },
+        "room7": {
+            "receptacles": [
+                {
+                    "name": "table",
+                    "x": [
+                        153,
+                        161
+                    ],
+                    "y": [
+                        86,
+                        88
+                    ],
+                    "position": [
+                        157,
+                        87
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "bed",
+                    "x": [
+                        145,
+                        152
+                    ],
+                    "y": [
+                        73,
+                        80
+                    ],
+                    "position": [
+                        148,
+                        76
+                    ],
+                    "floor": 2
+                }
+            ],
+            "receptacle_names": [
+                "table",
+                "bed"
+            ]
+        },
+        "room8": {
+            "receptacles": [
+                {
+                    "name": "table",
+                    "x": [
+                        153,
+                        161
+                    ],
+                    "y": [
+                        138,
+                        140
+                    ],
+                    "position": [
+                        157,
+                        139
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "bed",
+                    "x": [
+                        145,
+                        152
+                    ],
+                    "y": [
+                        124,
+                        131
+                    ],
+                    "position": [
+                        148,
+                        128
+                    ],
+                    "floor": 2
+                }
+            ],
+            "receptacle_names": [
+                "table",
+                "bed"
+            ]
+        },
+        "room9": {
+            "receptacles": [
+                {
+                    "name": "table",
+                    "x": [
+                        103,
+                        111
+                    ],
+                    "y": [
                         40,
                         42
+                    ],
+                    "position": [
+                        107,
+                        41
                     ],
                     "floor": 2
                 },
@@ -624,6 +864,10 @@
                         49,
                         56
                     ],
+                    "position": [
+                        116,
+                        52
+                    ],
                     "floor": 2
                 }
             ],
@@ -632,7 +876,110 @@
                 "bed"
             ]
         },
-        "room7": {
+        "room22": {
+            "receptacles": [
+                {
+                    "name": "coffee table",
+                    "x": [
+                        42,
+                        45
+                    ],
+                    "y": [
+                        216,
+                        221
+                    ],
+                    "position": [
+                        44,
+                        218
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "dinner counter",
+                    "x": [
+                        56,
+                        59
+                    ],
+                    "y": [
+                        212,
+                        223
+                    ],
+                    "position": [
+                        58,
+                        218
+                    ],
+                    "floor": 2
+                }
+            ],
+            "receptacle_names": [
+                "coffee table",
+                "dinner counter"
+            ]
+        },
+        "room10": {
+            "receptacles": [
+                {
+                    "name": "table",
+                    "x": [
+                        153,
+                        161
+                    ],
+                    "y": [
+                        35,
+                        37
+                    ],
+                    "position": [
+                        157,
+                        36
+                    ],
+                    "floor": 2
+                },
+                {
+                    "name": "bed",
+                    "x": [
+                        145,
+                        152
+                    ],
+                    "y": [
+                        21,
+                        29
+                    ],
+                    "position": [
+                        148,
+                        25
+                    ],
+                    "floor": 2
+                }
+            ],
+            "receptacle_names": [
+                "table",
+                "bed"
+            ]
+        },
+        "room23": {
+            "receptacles": [
+                {
+                    "name": "meeting table large",
+                    "x": [
+                        74,
+                        92
+                    ],
+                    "y": [
+                        176,
+                        181
+                    ],
+                    "position": [
+                        83,
+                        178
+                    ],
+                    "floor": 2
+                }
+            ],
+            "receptacle_names": [
+                "meeting table large"
+            ]
+        },
+        "room11": {
             "receptacles": [
                 {
                     "name": "small table",
@@ -643,6 +990,10 @@
                     "y": [
                         169,
                         171
+                    ],
+                    "position": [
+                        15,
+                        170
                     ],
                     "floor": 2
                 },
@@ -656,6 +1007,10 @@
                         180,
                         183
                     ],
+                    "position": [
+                        13,
+                        182
+                    ],
                     "floor": 2
                 },
                 {
@@ -667,6 +1022,10 @@
                     "y": [
                         177,
                         187
+                    ],
+                    "position": [
+                        32,
+                        182
                     ],
                     "floor": 2
                 },
@@ -680,6 +1039,10 @@
                         175,
                         177
                     ],
+                    "position": [
+                        31,
+                        176
+                    ],
                     "floor": 2
                 },
                 {
@@ -691,6 +1054,10 @@
                     "y": [
                         172,
                         183
+                    ],
+                    "position": [
+                        22,
+                        178
                     ],
                     "floor": 2
                 }
@@ -715,6 +1082,10 @@
                         171,
                         174
                     ],
+                    "position": [
+                        156,
+                        172
+                    ],
                     "floor": 2
                 },
                 {
@@ -727,178 +1098,16 @@
                         179,
                         182
                     ],
+                    "position": [
+                        156,
+                        180
+                    ],
                     "floor": 2
                 }
             ],
             "receptacle_names": [
                 "table",
                 "table"
-            ]
-        },
-        "room8": {
-            "receptacles": [
-                {
-                    "name": "table",
-                    "x": [
-                        103,
-                        111
-                    ],
-                    "y": [
-                        143,
-                        145
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "bed",
-                    "x": [
-                        112,
-                        119
-                    ],
-                    "y": [
-                        151,
-                        159
-                    ],
-                    "floor": 2
-                }
-            ],
-            "receptacle_names": [
-                "table",
-                "bed"
-            ]
-        },
-        "room23": {
-            "receptacles": [
-                {
-                    "name": "meeting table large",
-                    "x": [
-                        74,
-                        92
-                    ],
-                    "y": [
-                        176,
-                        181
-                    ],
-                    "floor": 2
-                }
-            ],
-            "receptacle_names": [
-                "meeting table large"
-            ]
-        },
-        "room9": {
-            "receptacles": [
-                {
-                    "name": "table",
-                    "x": [
-                        103,
-                        111
-                    ],
-                    "y": [
-                        117,
-                        119
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "bed",
-                    "x": [
-                        112,
-                        119
-                    ],
-                    "y": [
-                        126,
-                        133
-                    ],
-                    "floor": 2
-                }
-            ],
-            "receptacle_names": [
-                "table",
-                "bed"
-            ]
-        },
-        "room14": {
-            "receptacles": [
-                {
-                    "name": "furnituregymdesk",
-                    "x": [
-                        100,
-                        103
-                    ],
-                    "y": [
-                        207,
-                        210
-                    ],
-                    "floor": 2
-                }
-            ],
-            "receptacle_names": [
-                "furnituregymdesk"
-            ]
-        },
-        "room10": {
-            "receptacles": [
-                {
-                    "name": "table",
-                    "x": [
-                        153,
-                        161
-                    ],
-                    "y": [
-                        163,
-                        165
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "bed",
-                    "x": [
-                        145,
-                        152
-                    ],
-                    "y": [
-                        149,
-                        157
-                    ],
-                    "floor": 2
-                }
-            ],
-            "receptacle_names": [
-                "table",
-                "bed"
-            ]
-        },
-        "room11": {
-            "receptacles": [
-                {
-                    "name": "table",
-                    "x": [
-                        153,
-                        161
-                    ],
-                    "y": [
-                        61,
-                        63
-                    ],
-                    "floor": 2
-                },
-                {
-                    "name": "bed",
-                    "x": [
-                        145,
-                        152
-                    ],
-                    "y": [
-                        47,
-                        54
-                    ],
-                    "floor": 2
-                }
-            ],
-            "receptacle_names": [
-                "table",
-                "bed"
             ]
         },
         "room13": {
@@ -913,11 +1122,38 @@
                         176,
                         183
                     ],
+                    "position": [
+                        109,
+                        180
+                    ],
                     "floor": 2
                 }
             ],
             "receptacle_names": [
                 "polygon table"
+            ]
+        },
+        "room14": {
+            "receptacles": [
+                {
+                    "name": "furnituregymdesk",
+                    "x": [
+                        100,
+                        103
+                    ],
+                    "y": [
+                        207,
+                        210
+                    ],
+                    "position": [
+                        102,
+                        208
+                    ],
+                    "floor": 2
+                }
+            ],
+            "receptacle_names": [
+                "furnituregymdesk"
             ]
         },
         "room12": {
@@ -929,8 +1165,12 @@
                         111
                     ],
                     "y": [
-                        92,
-                        93
+                        143,
+                        145
+                    ],
+                    "position": [
+                        107,
+                        144
                     ],
                     "floor": 2
                 },
@@ -941,8 +1181,12 @@
                         119
                     ],
                     "y": [
-                        100,
-                        107
+                        151,
+                        159
+                    ],
+                    "position": [
+                        116,
+                        155
                     ],
                     "floor": 2
                 }

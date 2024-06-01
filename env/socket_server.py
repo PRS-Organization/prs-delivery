@@ -439,13 +439,13 @@ class ObjectsData(object):
             json_data = json.load(file)
         with open('env/data/map_room_data.json', 'r') as file:
             room_data = json.load(file)
-        with open('env/data/map_receptacle_data.json.json', 'r') as file:
+        with open('env/data/map_receptacle_data.json', 'r') as file:
             receptacles = json.load(file)
         with open('unity/PRS_Data/StreamingAssets/segmentationTagColorInfo.json', 'r') as file:
             seg_tag_data = json.load(file)
         with open('env/data/npc_data.json', 'r') as file:
             json_npc = json.load(file)
-        with open('env/data/room_mapping.json.json', 'r') as file:
+        with open('env/data/room_mapping.json', 'r') as file:
             room_names = json.load(file)
         # decode JSON
         seg_data = []
@@ -465,19 +465,23 @@ class ObjectsData(object):
             data = json.loads(json_i)
             env_objects.append(data)
         env_rooms = []
-        for floor_i in room_data:
-            for identifier, room_data in room_data[floor_i].items():
+        for floor_i in list(room_data.keys()):
+            for identifier, r_data in room_data[floor_i].items():
                 room_information = dict()
                 room_name = room_names[floor_i][identifier]
                 room_information['name'] = room_name
                 room_information['floor'] = int(floor_i)
-                x, y = abs(room_data['x'][1] - room_data['x'][0]) / 2, abs(room_data['y'][1] - room_data['y'][0])
-                room_information['position'] = (floor_i, x, y)
-                room_information['x'], room_information['y'] = room_data['x'], room_data['y']
+                x, y = abs(r_data['x'][1] - r_data['x'][0]) / 2, abs(r_data['y'][1] - r_data['y'][0])
+                room_information['position'] = (floor_i, round(x), round(y))
+                room_information['x'], room_information['y'] = r_data['x'], r_data['y']
                 room_information['id'] = identifier
                 room_information['semantic_name'] = floor_i + '_' + room_name
-                room_information['receptacles'] = receptacles[floor_i][identifier]['receptacles']
-                room_information['receptacles_list'] = receptacles[floor_i][identifier]['receptacle_names']
+                try:
+                    room_information['receptacles'] = receptacles[floor_i][identifier]['receptacles']
+                    room_information['receptacles_list'] = receptacles[floor_i][identifier]['receptacle_names']
+                except:
+                    room_information['receptacles'] = dict()
+                    room_information['receptacles_list'] = []
                 env_rooms.append(room_information)
 
         self.objects = env_objects
@@ -491,7 +495,7 @@ class ObjectsData(object):
         map1 = np.loadtxt('env/data/semantic_map_1.txt', dtype=int, delimiter='\t')
         map2 = np.loadtxt('env/data/semantic_map_2.txt', dtype=int, delimiter='\t')
         self.sematic_map = [map0, map1, map2]
-        with open('data/semantic_map_tags.json', 'r') as file:
+        with open('env/data/semantic_map_tags.json', 'r') as file:
             self.semantic_tags = json.load(file)
 
     def point_determine(self, pos):
@@ -625,6 +629,7 @@ class PrsEnv(object):
         # agent_thread = threading.Thread(target=agent_plan, args=(self.server, self.agent))
         self.agent.get_all_map()
         # agent_thread.start()
+
         # ----------------------- npc coming----------------------
         npc_0 = Npc(0, self.server, self.env_time, self.objs_data)
         npc_1 = Npc(1, self.server, self.env_time, self.objs_data)
@@ -641,7 +646,7 @@ class PrsEnv(object):
         self.task = {'type': None, 'npc': None, 'object': None, 'target': None, 'state': 0, 'result': None}
         self.npcs = [npc_0, npc_1, npc_2, npc_3, npc_4, npc_5, npc_6, npc_7, npc_8, npc_9]
         self.agent.npcs = self.npcs
-        self.receptacle_mark()
+        # self.receptacle_mark()
         with open('env/data/npc_data.json', 'r') as file:
             npc_data = json.load(file)
         self.npc_data = npc_data
