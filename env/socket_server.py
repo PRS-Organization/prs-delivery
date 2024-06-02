@@ -784,8 +784,8 @@ class PrsEnv(object):
             self.agent.release_object()
             pos_original = self.objs_data.objects[agent_obj_id]['position']
             self.server.object_transform(obj_type=1, target_id=agent_obj_id, pos=pos_original)
-        # if save:
-        # return result
+        if save:
+            return result
         if score:
             grade = self.delivery_task_score(result)
             result['task_score'] = grade

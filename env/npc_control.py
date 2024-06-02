@@ -35,6 +35,7 @@ class Env(object):
         f1, f2, f3 = self.height_f1, self.height_f2, self.height_f3
         self.location = dict()
         # self.room_process()
+        # Align scene semantics, e.g. room12 may be the kitchen
         with open('env/data/room_sampling_points.json', 'r') as file:
             self.location = json.load(file)
 

@@ -1,5 +1,6 @@
 from env.socket_server import *
 import os
+from robot.baseline import *
 
 # Environment initialization
 prs = PrsEnv(is_print=1)
@@ -14,8 +15,10 @@ for task_i, task_id in enumerate(tasks):
     start_time = time.time()
     instruction, npc_information, data = prs.delivery_task_import(task)
     # ------------ robot execution method -----------------
+    # delivery_execution(prs, instruction, npc_information)
 
     # ------------ robot execution method -----------------
     time.sleep(0.5)
     result = prs.delivery_task_evaluate(task, score=1, save=0)
+    print(result['task_score'])
     # break
