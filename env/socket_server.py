@@ -458,8 +458,8 @@ class ObjectsData(object):
                 room_name = room_names[floor_i][identifier]
                 room_information['name'] = room_name
                 room_information['floor'] = int(floor_i)
-                x, y = abs(r_data['x'][1] - r_data['x'][0]) / 2, abs(r_data['y'][1] - r_data['y'][0])
-                room_information['position'] = (floor_i, round(x), round(y))
+                x, y = (r_data['x'][1] + r_data['x'][0]) / 2, (r_data['y'][1] + r_data['y'][0])/2
+                room_information['position'] = (int(floor_i), round(x), round(y))
                 room_information['x'], room_information['y'] = r_data['x'], r_data['y']
                 room_information['id'] = identifier
                 room_information['semantic_name'] = floor_i + '_' + room_name
@@ -586,8 +586,7 @@ class PrsEnv(object):
         # is_print: 0 without print, 1 print information to screen;
         # rendering=1 with unity render, 0 is headless mode;   start_up_mode: 0 manual, 1 automatic
         print("PRS environment beta is starting without interaction")
-        print('Please open the Unity program (start.sh)')
-        print('PRS challenge task and benchmark come soon!')
+        print('More PRS challenge task and benchmark come soon!')
         self.original_stdout = sys.stdout
         if not is_print:
             dev_null = DevNull()
@@ -617,6 +616,8 @@ class PrsEnv(object):
                 self.process = subprocess.Popen(command_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 print("Starting Unity process...")
                 # If needed, you can add more processing logic here, such as waiting for the process to finish, etc.
+            else:
+                print('Please open the Unity program (unity/start.sh)')
         except Exception as e:
             # Catch any exceptions that occur during startup and print the error message
             print(f"An error occurred during beginning: {e}")

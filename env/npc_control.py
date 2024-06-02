@@ -258,7 +258,10 @@ class Npc(object):
                 return 0
             random_key = np.random.choice(list(self.env.location.keys()))
             location_now = self.env.location[random_key]
-            result = self.goto_randomly(location_now[1], 3.5, 2, 20)
+            pos = location_now[1]
+            pos[0] = int(pos[0])
+            x, y, z = self.server.maps.get_world_position(pos[1], pos[0], pos[2])
+            result = self.goto_randomly((x, y, z), 5.0, 2, 20)
             if result:
                 res, obj = self.go_to_object('Seat')
                 if res:
@@ -616,7 +619,7 @@ class Agent(object):
                     except:
                         return 0
                     pos, info = self.pos_query()
-                    if self.env.calculate_distance(tar_obj_info['position'], pos) > 3.0:
+                    if self.env.calculate_distance(tar_obj_info['position'], pos) > 5.0:
                         return 0
                     elif self.env.calculate_distance(tar_obj_info['position'], pos) > 1.0:
                         self.goto_target_goal(tar_obj_info['position'], 1, 1, position_mode=0)
@@ -1240,7 +1243,7 @@ class Agent(object):
                     location_now = self.env.location[loc]
                     break
         if location_now:
-            outcome = self.goto_target_goal(location_now[ids], 2, 2, 20)
+            outcome = self.goto_target_goal(location_now[ids], 2, 2, 20, position_mode=1)
         return outcome
 
     # def navigate(self, map_floor, goal):
