@@ -1,6 +1,6 @@
 [//]: # (# PRS-Test)
 # PRS Challenge: Human-centered In-building Embodied  Delivery Benchmark
-## [CVPR Embodied AI Workshop](https://embodied-ai.org/)
+## [CVPR 2024 Embodied AI Workshop](https://embodied-ai.org/)
 
 ## Quick Start
 
@@ -61,6 +61,10 @@ If you want to run baseline method, please install ```transformers==4.40.2 ```, 
 
 
 Save the result and submit the json to Eval AI leaderboard.
+
+## More API Guidance
+[NPC API](document/api.md)
+
 [//]: # (input your API key for LLM service)
 
 [//]: # (download vision model for object detect)
