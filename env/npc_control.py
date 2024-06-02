@@ -36,7 +36,7 @@ class Env(object):
         self.location = dict()
         # self.room_process()
         with open('env/data/room_sampling_points.json', 'r') as file:
-            self.location  = json.load(file)
+            self.location = json.load(file)
 
     def room_process(self):
         for room in self.data.room_area:
