@@ -8,7 +8,7 @@ Follow these steps to quickly set up and run the PRS delivery task version:
 
 1. Clone the PRS demo repository:  
 ```
-    git clone https://github.com/PRS-Organization/PRS-challenge.git
+    git clone https://github.com/PRS-Organization/prs-delivery.git
 ```  
 2. Ensure you have a Python virtual environment (Python version >= 3.9) activated.
 
@@ -49,6 +49,7 @@ or start with only unity application:
 	bash clean_port.sh
  ```  
 Note: Or use ```prs.finish_env()``` the end PRS environment.
+
 12. To get started with the Delivery Task Dataset, simply run the following command in your terminal:
 
 ```
@@ -58,6 +59,8 @@ This will initiate the evaluation process using the dataset.
 
 If you want to run baseline method, please install ```transformers==4.40.2 ```, ```torch==2.0.1```, ```openai==1.30.5```.
 
+
+Save the result and submit the json to Eval AI leaderboard.
 [//]: # (input your API key for LLM service)
 
 [//]: # (download vision model for object detect)
