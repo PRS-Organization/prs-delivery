@@ -20,7 +20,7 @@ Follow these steps to quickly set up and run the PRS delivery task version:
 
 5. Extract the `prs_unity_demo.rar` file into the project folder:  
 ```
-	unzip PRS_Ubuntu_0.3.0.zip
+    unzip PRS_Ubuntu_0.3.0.zip
 ```   
 Note: This should create a `unity` folder. Give it necessary permissions:  
 ```
@@ -53,7 +53,7 @@ Note: Or use ```prs.finish_env()``` the end PRS environment.
 12. To get started with the Delivery Task Dataset, simply run the following command in your terminal:
 
 ```
-python task_evaluation.py
+    python task_evaluation.py
 ```
 This will initiate the evaluation process using the dataset.
 
