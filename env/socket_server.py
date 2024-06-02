@@ -441,24 +441,11 @@ class ObjectsData(object):
             room_data = json.load(file)
         with open('env/data/map_receptacle_data.json', 'r') as file:
             receptacles = json.load(file)
-        with open('unity/PRS_Data/StreamingAssets/segmentationTagColorInfo.json', 'r') as file:
-            seg_tag_data = json.load(file)
         with open('env/data/npc_data.json', 'r') as file:
             json_npc = json.load(file)
         with open('env/data/room_mapping.json', 'r') as file:
             room_names = json.load(file)
         # decode JSON
-        seg_data = []
-        rgb_id = dict()
-        for index_tag, item_tag in enumerate(seg_tag_data['TagColors']):
-            # data_i = json.loads(item_tag)
-            seg_data.append(item_tag)
-            r_n, g_n, b_n = float(item_tag['color']['r']), float(item_tag['color']['g']), float(item_tag['color']['b'])
-            r_n, g_n, b_n = '{:.2f}'.format(r_n), '{:.2f}'.format(g_n), '{:.2f}'.format(b_n)
-            rgb = (r_n, g_n, b_n)
-            rgb_id[rgb] = index_tag
-            if item_tag['tag'] == "UnTagged" or item_tag['tag'].lower() == "untagged":
-                self.background = rgb
 
         env_objects = []
         for json_i in json_data['statusDetails']:
@@ -487,8 +474,6 @@ class ObjectsData(object):
         self.objects = env_objects
         self.room_area = env_rooms
         self.room_receptacles = receptacles
-        self.segment_tag = seg_data
-        self.rgb_to_id = rgb_id
         self.characters = json_npc['npc']
         self.room_receptacles = None
         map0 = np.loadtxt('env/data/semantic_map_0.txt', dtype=int, delimiter='\t')
@@ -514,6 +499,23 @@ class ObjectsData(object):
                 if abs(point_P['z']-room_i['floor']) < 1:
                     res = room_i['semantic_name']
         return res
+
+    def segment(self):
+        with open('unity/PRS_Data/StreamingAssets\segmentationTagColorInfo.json', 'r') as file:
+            seg_tag_data = json.load(file)
+        seg_data = []
+        rgb_id = dict()
+        for index_tag, item_tag in enumerate(seg_tag_data['TagColors']):
+            # data_i = json.loads(item_tag)
+            seg_data.append(item_tag)
+            r_n, g_n, b_n = float(item_tag['color']['r']), float(item_tag['color']['g']), float(item_tag['color']['b'])
+            r_n, g_n, b_n = '{:.2f}'.format(r_n), '{:.2f}'.format(g_n), '{:.2f}'.format(b_n)
+            rgb = (r_n, g_n, b_n)
+            rgb_id[rgb] = index_tag
+            if item_tag['tag'] == "UnTagged" or item_tag['tag'].lower() == "untagged":
+                self.background = rgb
+        self.segment_tag = seg_data
+        self.rgb_to_id = rgb_id
 
     def object_parsing(self, ins, target=['Chair','Stool']):
         datas = eval(ins['statusDetail'])
@@ -629,7 +631,7 @@ class PrsEnv(object):
         # agent_thread = threading.Thread(target=agent_plan, args=(self.server, self.agent))
         self.agent.get_all_map()
         # agent_thread.start()
-
+        self.objs_data.segment()
         # ----------------------- npc coming----------------------
         npc_0 = Npc(0, self.server, self.env_time, self.objs_data)
         npc_1 = Npc(1, self.server, self.env_time, self.objs_data)
