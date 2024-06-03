@@ -1,5 +1,5 @@
 [//]: # (# PRS-Test)
-# Human-centered In-building Embodied  Delivery Benchmark
+# Human-centered In-building Embodied Delivery Benchmark
 ## [PRS Challenge](https://prsorg.github.io/challenge) hosted on [CVPR 2024 Embodied AI Workshop](https://embodied-ai.org/)
 
 ## Quick Start
@@ -16,7 +16,7 @@ git clone https://github.com/PRS-Organization/prs-delivery.git
 ```
 pip install -r prs_requirements.txt
 ```
-4. Download the Unity executable file (Ubuntu version) from [PRS executable program](https://huggingface.co/datasets/xzq1999/prs-env/tree/main).
+4. Download the Unity executable file (for Ubuntu, Windows, and Mac) from [PRS executable program](https://huggingface.co/datasets/xzq1999/prs-env/tree/main). If you are using the macOS or Windows version, you need to modify some of the environment data paths in ```StreamingAssets``` folder and executable application paths.
 
 5. Extract the `prs_unity_demo.rar` file into the project folder:  
 ```
@@ -57,13 +57,15 @@ python task_evaluation.py
 ```
 This will initiate the evaluation process using the dataset.
 
-If you want to run baseline method, please install ```transformers==4.40.2 ```, ```torch==2.0.1```, ```openai==1.30.5```. And fill in the API-key in the ```robot\llm_process.py```.
+If you want to run base[baseline.py](robot%2Fbaseline.py)line method, please install ```transformers==4.40.2 ```, ```torch==2.0.1```, ```openai==1.30.5```. And fill in the API-key in the ```robot\llm_process.py```.
 We utilize [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) to achieve zero-shot object detection with text prompt, you can replace it with others, e.g. [Grounded SAM](https://github.com/IDEA-Research/Grounded-Segment-Anything).
 
 Save the result and submit the json to Eval AI leaderboard.
 
 ## More API Guidance
-[NPC API](document/api.md)
+[PRS Platform API](document/api.md)
+
+
 
 [//]: # (input your API key for LLM service)
 
