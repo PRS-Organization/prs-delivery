@@ -6,7 +6,7 @@
 
 Follow these steps to quickly set up and run the PRS delivery task version:
 
-1. Clone the PRS demo repository:  
+1. Clone the PRS delivery repository:  
 ```
 git clone https://github.com/PRS-Organization/prs-delivery.git
 ```  
@@ -18,11 +18,11 @@ pip install -r prs_requirements.txt
 ```
 4. Download the Unity executable file (for Ubuntu, Windows, and Mac) from [PRS executable program](https://huggingface.co/datasets/xzq1999/prs-env/tree/main). If you are using the macOS or Windows version, you need to modify some of the environment data paths in ```StreamingAssets``` folder and executable application paths.
 
-5. Extract the `prs_unity_demo.rar` file into the project folder:  
+5. Extract the `PRS_Ubuntu_x.x.x.zip` file into the `unity` folder:  
 ```
 unzip PRS_Ubuntu_0.3.0.zip
 ```   
-Note: This should create a `unity` folder. Give it necessary permissions:  
+Note that the contents after unzipping should be placed in `unity` folder, and give `unity` folder file permissions:  
 ```
 sudo chmod 777 -R unity
 ```
@@ -32,13 +32,13 @@ python prs_demo.py
 ```     
 or start with only unity application: 
 ``` 
-bash start.sh 
+bash ./unity/start.sh 
 ```
 7. If you encounter a port occupation error, clean up occupied ports:  
 ```
 bash clean_port.sh
 ```
-8. Manual start: ```PrsEnv(start_up_mode=0)``` after running the Python script, you can open another terminal and execute ```unity/start.sh``` or directly run `unity/PRS.x86_64`.
+8. Manual start: class initialization parameter is ```PrsEnv(start_up_mode=0)```, after running the Python script, you can open another terminal and execute ```unity/start.sh``` or directly run `unity/PRS.x86_64`.
 
 9. Runing on the headless server without rendering initialization ```PrsEnv(rendering=0)```.
 
