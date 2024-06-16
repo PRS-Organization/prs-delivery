@@ -998,13 +998,15 @@ class Agent(object):
         re_id = self.server.send_data(5, command, 1)
         return re_id
 
-    def goto_target_goal(self, position_tar, radius=1, delete_dis=2, times=6, position_mode=0, accurate=0):
+    def goto_target_goal(self, position_tar, radius=1.0, delete_dis=3, times=6, position_mode=0,
+                         accurate=0, sort=1, inflation=0, absolute_distance=0):
         # 0 (world pos) position_tar:(0.5, 0.1, 1.2), 1: (x=floor_n, y=map_i, z=map_j)
         try:
             xx, yy, zz = position_tar[0], position_tar[1], position_tar[2]
         except:
             xx, yy, zz = position_tar['x'], position_tar['y'], position_tar['z']
-        floor, point_list = self.server.maps.get_an_accessible_area(xx, yy, zz, radius, position_mode)
+        floor, point_list = self.server.maps.get_an_accessible_area(xx, yy, zz, radius, position_mode, sort,
+                                                                    inflation, absolute_distance)
         result_go = 0
         for i_try in range(times):
             if not self.running or self.server.stop_event.is_set() or not self.server.state:
