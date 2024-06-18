@@ -16,7 +16,7 @@ git clone https://github.com/PRS-Organization/prs-delivery.git
 ```
 pip install -r prs_requirements.txt
 ```
-4. Download the Unity executable file (for Ubuntu, Windows, and Mac) from [PRS executable program](https://huggingface.co/datasets/xzq1999/prs-env/tree/main). If you are using the macOS or Windows version, you need to modify some of the environment data paths in ```StreamingAssets``` folder and executable application paths.
+4. Download the Unity executable file (for Ubuntu, Windows, and Mac) from [PRS executable program](https://docs.google.com/forms/d/e/1FAIpQLScrk25iSnnmOH8cj4eqD8lcALcj1Cx1bSiiTsw9q9DzvWnCig/viewform?usp=sf_link). If you are using the macOS or Windows version, you need to modify some of the environment data paths in ```StreamingAssets``` folder and executable application paths.
 
 5. Extract the `PRS_Ubuntu_x.x.x.zip` file into the `unity` folder:  
 ```
