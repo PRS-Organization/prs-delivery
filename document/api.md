@@ -134,7 +134,8 @@ prs.agent.observation(degree=0, camera=0)
 Request Visual Interaction
 
 ```
-prs.agent.request_interaction()
+prs.agent.object_interaction(input_matrix=array, manipulaton=1, type=0)
+[//]: # (prs.agent.request_interaction&#40;&#41;)
 ```
 This function requests an interaction with the visual system.
 Input: A two-dimensional matrix marking the target and the operation type:
