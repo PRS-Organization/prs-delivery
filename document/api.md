@@ -128,25 +128,54 @@ prs.agent.joint_control(joint_id=4, target=20)
 ```
 Using the camera to observe the surroundings with the given angle
 ```
-prs.agent.observation(degree=0, camera=0)
+prs.agent.observation(degree=0, camera=0, up_down=30)
 ```
-    prs.agent.observation(camera=0, degree=0)
-Request Visual Interaction
+
+"Request Visual Interaction"
 
 ```
 prs.agent.object_interaction(input_matrix=array, manipulaton=1, type=0)
-[//]: # (prs.agent.request_interaction&#40;&#41;)
 ```
-This function requests an interaction with the visual system.
+[This function requests an interaction with the visual system.
 Input: A two-dimensional matrix marking the target and the operation type:
 0: recognize
 1: grasp
 2: approach target
-3, etc.
+3, etc.]
+
+[//]: # (prs.agent.request_interaction&#40;&#41;)
+[//]: # (prs.agent.interaction&#40;&#41;)
+
+Robot pose adjustment
 ```
-prs.agent.interaction()
+prs.agent.initial_pose()
 ```
 
+Go to receptacle of the room
+```
+prs.agent.goto_receptacle(room='office', recepacle='table', random=1)
+```
+
+Look at somewhere (head camera)
+```
+prs.agent.head_camera_look_at((1, 122, 54))
+```
+
+Estimating distance through mask
+```
+tar_distance, view_angle = prs.agent.depth_estimation(target_mask, depth_m, field_of_view=90)
+```
+
+Calculate accessible locations based on target distance and observation angle
+```
+position = prs.agent.target_direction(degree=camera_degree, distance=tar_distance, target_degree_view=view_angle)
+```
+
+[//]: # (```)
+
+[//]: # (prs.agent.head_camera_look_at)
+
+[//]: # (```)
 ## Map and Position API
 
 Determine the area based on world coordinates, returning the room or None
