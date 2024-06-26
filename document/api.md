@@ -32,13 +32,13 @@ prs.finish_env()
 
 ## Task API
 
-Initialize the task program, 0 stands for searching and delivery tasks
+Initialize the task program, "task" stands for JSON content of a delivery task
 ```
-prs.task_choice(0)
+prs.delivery_task_import(task)
 ```
-Evaluate the task result
+Evaluate the task result: score=1 represents result calculation, and save = 1 will return the result dict for saving the JSON file
 ```
-prs.task_evaluate()
+prs.delivery_task_evaluate(task, score=1, save=0)
 ```
 ## Robot API
 

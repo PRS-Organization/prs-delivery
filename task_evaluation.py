@@ -5,7 +5,7 @@ from robot.baseline import *
 # Environment initialization
 prs = PrsEnv(is_print=1)
 
-with open(os.path.join('task', 'dataset', 'deliver_task_5_19_test_set.json'), 'r') as file:
+with open(os.path.join('task', 'dataset', 'deliver_task_test_set.json'), 'r') as file:
     task_data = json.load(file)
 tasks = list(task_data.keys())
 print('task:', len(tasks))
