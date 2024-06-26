@@ -688,7 +688,7 @@ class Agent(object):
         room_receptacle = room_info['receptacles'][recepacle]
         pos, info = self.pos_query()
         floor_robot, robot_i, robot_j = self.map_position_agent['floor'], self.map_position_agent['x'], self.map_position_agent['y']
-        floor_receptacle, rec_i, rec_j, _ = self.server.maps.get_point_info(room_receptacle['position'])
+        floor_receptacle, rec_i, rec_j = room_receptacle['floor'], room_receptacle['position'][0], room_receptacle['position'][1]
         if floor_receptacle != floor_receptacle:
             print('robot and receptacle is not the same floor !')
             return 0, 0
@@ -725,7 +725,7 @@ class Agent(object):
                                     position_mode=1)
         if res:
             # print(res, room_receptacle['position'])
-            self.head_camera_look_at(room_receptacle['position'], accuracy=1)
+            self.head_camera_look_at((floor_receptacle, rec_i, rec_j), accuracy=0)
         return res, room_receptacle
 
     def depth_estimation(self, matrix_target, depth, field_of_view=90):
@@ -1307,10 +1307,15 @@ class Agent(object):
         return angle_degrees
 
     def head_camera_look_at(self, position, accuracy=0):
-        try:
-            xx, yy = position['x'], position['z']
-        except:
-            xx, yy = position[0], position[2]
+        if not accuracy:
+            try:
+                flo, xx, yy = position[0], position[1], position[2]
+            except: pass
+        else:
+            try:
+                xx, yy = position['x'], position['z']
+            except:
+                xx, yy = position[0], position[2]
         # if world_position and accuracy == 0:
         #     flo, xx, yy, is_o = self.server.maps.get_point_info(position)
         self.pos_query()

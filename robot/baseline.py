@@ -144,13 +144,13 @@ def go_to_location(prs, destination='bed room 1'):
                 position = prs.objs_data.room_sampling_points[room]
         if position is None: return 0
         target = position[0]
-        prs.agent.goto_target_goal(target, 1.25, position_mode=0)
+        prs.agent.goto_target_goal(target, 1.25, position_mode=1)
         # Facing the center position of the room space
         prs.agent.head_camera_look_at(position[1], accuracy=0)
 
 
 def room_filter(prs, destination, floor=2):
-    rooms = prs.objs_data.room_area[floor]
+    rooms = prs.objs_data.room_area
     locations = [roo['name'] for roo in rooms]
     # locations = prs.objs_data.buliding_rooms[floor]
     best_match_rooms = target_matching(destination, locations)
