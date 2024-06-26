@@ -55,7 +55,7 @@ def delivery_execution(prs, instruction, resume):
     # print(object_room, human_room)
     speed_time, camera_pitch = 3, 20
     prs.sim_speed(speed_time)
-    # Unity rendering and runtime acceleration
+    # Unity rendering and runtime acceleration, notice the possibility of logical errors caused by fast rendering speed
     go_to_location(prs, object_room)
     prs.sim_speed(1)
     camera_rgb, camera_degree = scene_understanding(prs, task_planning[0], task_planning[1], pitch=camera_pitch, mode=1)
@@ -135,19 +135,24 @@ def instruction_parsing(task_instruction, description=None):
 
 
 def go_to_location(prs, destination='bed room 1'):
+    # go to the target room through global map
     if destination is not None:
-        # prs.agent.goto_target_goal((-8.4, 0.1, 7.9), position_mode=0)
         # prs.agent.goto_target_goal((-8.4, 0.1, 7.9), radius=1.5, position_mode=1)
-        tar = prs.npcs[0].env.location[destination][0]
-        prs.agent.goto_target_goal(tar, 1.25, position_mode=0)
+        position = None
+        for room in prs.objs_data.room_sampling_points:
+            if room.split('_')[1] == destination:
+                position = prs.objs_data.room_sampling_points[room]
+        if position is None: return 0
+        target = position[0]
+        prs.agent.goto_target_goal(target, 1.25, position_mode=0)
         # Facing the center position of the room space
-        for room in prs.objs_data.rooms:
-            if room['roomName'] == destination:
-                prs.agent.head_camera_look_at(room['roomCenter'], 1)
+        prs.agent.head_camera_look_at(position[1], accuracy=0)
 
 
 def room_filter(prs, destination, floor=2):
-    locations = prs.objs_data.buliding_rooms[floor]
+    rooms = prs.objs_data.room_area[floor]
+    locations = [roo['name'] for roo in rooms]
+    # locations = prs.objs_data.buliding_rooms[floor]
     best_match_rooms = target_matching(destination, locations)
     return best_match_rooms
 
@@ -155,7 +160,13 @@ def room_filter(prs, destination, floor=2):
 def approach_landmark(prs, landmark, room):
     # Determine which one in the list has a higher similarity to the destination.
     # For 'bed room 1', it is desired to output 'bedroom1' instead of 'bedroom'
-    landmarks, original_index = prs.receptacles_information[room]['receptacle_names'], []
+    room_info = None
+    for room_i in prs.objs_data.room_area:
+        if room_i['name'] == room:
+            room_info = room_i
+            break
+    if room_info is None: return None
+    landmarks, original_index = room_info['receptacles_list'], []
     potential_receptacles = target_matching(landmark, landmarks)
     for rec in potential_receptacles:
         original_index.append(landmarks.index(rec))
@@ -164,13 +175,13 @@ def approach_landmark(prs, landmark, room):
 
 
 def scene_understanding(prs, target, surrounding=None, pitch=20, mode=0):
-    # The angle of horizontal X-axis rotation, equivalent to the pitch angle
+    # The angle of horizontal X-axis rotation, equivalent to the pitch angle, whether to segment
     observation_views = [0, -60, 60]
     for degree in observation_views:
         if surrounding is not None:
             target = target + ' or ' + surrounding
         context1 = 'Please answer yes or no. If there is '
-        context2 = ', or there may be similar objects or content. Only answer yes or no'
+        context2 = ', or there may be similar objects or content. Only answer yes or no!'
         detect_prompt = context1 + target + context2
         head_camera_rgb = prs.agent.observation(degree=degree, camera=0, up_down=pitch)
         if mode:
@@ -184,6 +195,7 @@ def scene_understanding(prs, target, surrounding=None, pitch=20, mode=0):
             if seg is not None:
                 return head_camera_rgb, degree
     prs.agent.joint_control(joint_id=14, target=0)
+    # Adjust the camera to its original degree 0 (look straight ahead)
     return None, None
 
 

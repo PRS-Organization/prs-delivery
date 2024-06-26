@@ -445,6 +445,8 @@ class ObjectsData(object):
             json_npc = json.load(file)
         with open('env/data/room_mapping.json', 'r') as file:
             room_names = json.load(file)
+        with open('room_sampling_points.json', 'r') as file:
+            self.room_sampling_points = json.load(file)
         # decode JSON
 
         env_objects = []
