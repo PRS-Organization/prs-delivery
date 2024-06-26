@@ -13,6 +13,7 @@ kiwisolver==1.4.5
 matplotlib==3.8.3
 nodeenv==1.8.0
 numpy==1.26.4
+openai==1.30.5
 opencv-python==4.9.0.80
 packaging==24.0
 pgraph-python==0.6.2
@@ -33,6 +34,7 @@ six==1.16.0
 spatialgeometry==1.1.0
 spatialmath-python==1.1.9
 swift-sim==1.1.0
+transformers==4.40.2
 typing_extensions==4.10.0
 virtualenv==20.25.1
 websockets==12.0
