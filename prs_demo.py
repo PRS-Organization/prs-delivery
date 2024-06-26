@@ -36,8 +36,8 @@ if __name__ == '__main__':
     prs.agent.object_interaction(marked_arr, manipulaton=1)
     prs.agent.goto_target_goal((2, 130, 120), position_mode=1)
     # robot navigate to floor3 point (130, 120)
-    # API document come soon!
     map_room = prs.server.maps.floor3
 
     time.sleep(20)
+    # ------------ end ------------
     prs.finish_env()
