@@ -306,8 +306,8 @@ class Server(object):
         # IK is here
         elif cmd == "Information": pass
             # print("6、This is robot information", dict_data['requestIndex'], ', length- ', len(dict_data),)
-        else:
-            print("\nUnknown cmd: {0}".format(cmd))
+        else: pass
+            # print("\nUnknown cmd: {0}".format(cmd))
         # Continue receiving messages
         #self._recv_bytes()
 
@@ -445,7 +445,7 @@ class ObjectsData(object):
             json_npc = json.load(file)
         with open('env/data/room_mapping.json', 'r') as file:
             room_names = json.load(file)
-        with open('room_sampling_points.json', 'r') as file:
+        with open('env/data/room_sampling_points.json', 'r') as file:
             self.room_sampling_points = json.load(file)
         # decode JSON
 

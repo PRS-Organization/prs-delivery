@@ -5,7 +5,7 @@ import os
 from robot.baseline import *
 
 # Environment initialization
-prs = PrsEnv(is_print=1)
+prs = PrsEnv(is_print=1, rendering=1, start_up_mode=1)
 
 with open(os.path.join('task', 'dataset', 'deliver_task_test_set.json'), 'r') as file:
     task_data = json.load(file)

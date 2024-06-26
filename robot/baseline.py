@@ -224,7 +224,7 @@ def manipulate_target(prs, target_obj, degree, pitch=20):
 
 if __name__ == "__main__":
     # Environment initialization
-    prs = PrsEnv(is_print=1)
+    prs = PrsEnv(is_print=1, rendering=1, start_up_mode=1)
 
     with open(os.path.join('task', 'dataset', 'deliver_task_test_set.json'), 'r') as file:
         task_data = json.load(file)
