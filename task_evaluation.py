@@ -1,3 +1,5 @@
+import time
+
 from env.socket_server import *
 import os
 from robot.baseline import *
@@ -21,4 +23,12 @@ for task_i, task_id in enumerate(tasks):
     time.sleep(0.5)
     result = prs.delivery_task_evaluate(task, score=1, save=0)
     print(result['task_score'])
-    # break
+
+    # ====== if you want to save the result as json file to submission on Eval AI ==========
+    # result_save = prs.delivery_task_evaluate(task, score=0, save=1)
+    # task_results[task_id] = result_save
+    # with open('task/result/deliver_task_result.json', 'w') as file:
+    #     json.dump(task_results, file, indent=4)
+    # ---------------------------------------------------------------------------------------
+time.sleep(1)
+prs.finish_env()

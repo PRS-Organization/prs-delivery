@@ -4,7 +4,9 @@ import difflib
 import os
 import matplotlib.pyplot as plt
 # from env.socket_server import *
+# from llm_process import *
 from robot.llm_process import *
+# Notice the relative path of the main script
 
 
 def instruction_parsing_res(prs, instruction, resume):
@@ -232,11 +234,11 @@ if __name__ == "__main__":
             break
         result = prs.delivery_task_evaluate(task, score=1, save=0)
         print(result['task_score'])
-        # if you want to save the result as json file to submission on Eval AI
-        # result_save = prs.delivery_task_evaluate(task, score=1, save=1)
+        # ====== if you want to save the result as json file to submission on Eval AI ==========
+        # result_save = prs.delivery_task_evaluate(task, score=0, save=1)
         # task_results[task_id] = result_save
         # with open('task/result/deliver_task_result.json', 'w') as file:
         #     json.dump(task_results, file, indent=4)
-        # --------------------------------------------------------------------
+        # ---------------------------------------------------------------------------------------
     time.sleep(3)
     prs.finish_env()
