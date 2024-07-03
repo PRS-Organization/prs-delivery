@@ -55,7 +55,7 @@ Note: Or use ```prs.finish_env()``` to end PRS environment in Python script.
 ```
 python task_evaluation.py
 ```
-This will initiate the evaluation process using delivery task dataset.
+This will initiate the evaluation process using delivery task dataset. Baseline method is in ```./robot/baseline.py```.
 
 If you want to run baseline method, please install ```transformers==4.40.2 ```, ```torch==2.0.1```, ```openai==1.30.5```. And fill in the API-key in the ```robot\llm_process.py```.
 We utilize [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) to achieve zero-shot object detection with text prompt, you can replace it with others, e.g. [Grounded SAM](https://github.com/IDEA-Research/Grounded-Segment-Anything).
