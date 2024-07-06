@@ -57,12 +57,16 @@ python task_evaluation.py
 ```
 This will initiate the evaluation process using delivery task dataset.
 
-13. If you want to run baseline method, please install ```transformers==4.40.2 ```, ```torch==2.0.1```, ```openai==1.30.5```. And fill in the API-key in the ```robot\llm_process.py```.
+## Baseline Method
+
+If you want to run baseline method, please install ```transformers==4.40.2 ```, ```torch==2.0.1```, ```openai==1.30.5```. And fill in the API-key in the ```robot\llm_process.py```.
 We utilize [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) to achieve zero-shot object detection with text prompt, you can replace it with others, e.g. [Grounded SAM](https://github.com/IDEA-Research/Grounded-Segment-Anything).
 
-BThe baseline method is in ```./robot/baseline.py```, ```./robot/object_detection.py``` is visual detection, and ```./robot/llm_process.py``` is the LMM and LLM application. 
+Make```delivery_execution(prs, instruction, npc_information)``` available in ```task_evaluation.py``` on line 20.
 
-Save the result and submit the json to Eval AI leaderboard.
+The main process of the baseline method is in ```./robot/baseline.py```, ```./robot/object_detection.py``` is visual detection, and ```./robot/llm_process.py``` is the LMM and LLM application. 
+
+Save the result and submit the ```result.json``` to [Eval AI leaderboard](https://eval.ai/web/challenges/challenge-page/2313/overview).
 
 ## More API Guidance
 [PRS Platform API](document/api.md)
