@@ -91,6 +91,7 @@ def delivery_execution(prs, instruction, resume):
                 break
         if room_info is None: return None
         receptacles_info = room_info['receptacles_list']
+        # Locate possible receptacles in the room
         for r_index, rec in enumerate(receptacles_info):
             if camera_rgb is not None: break
             prs.sim_speed(speed_time)
