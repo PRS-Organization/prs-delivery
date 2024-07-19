@@ -85,7 +85,13 @@ def delivery_execution(prs, instruction, resume):
     if camera_rgb is not None:
         search_result = approach_target(camera_rgb, camera_degree, task_planning[3], 3)
     if not search_result:
-        for r_index, rec in enumerate(prs.receptacles_information[human_room]['receptacle names']):
+        for room_i in prs.objs_data.room_area:
+            if room_i['name'] == human_room:
+                room_info = room_i
+                break
+        if room_info is None: return None
+        receptacles_info = room_info['receptacles_list']
+        for r_index, rec in enumerate(receptacles_info):
             if camera_rgb is not None: break
             prs.sim_speed(speed_time)
             prs.agent.goto_receptacle(room=human_room, recepacle=r_index, random=1)
