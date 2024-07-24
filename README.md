@@ -12,6 +12,11 @@ git clone https://github.com/PRS-Organization/prs-delivery.git
 ```  
 2. Ensure you have a Python virtual environment (Python version >= 3.9) activated.
 
+```
+conda create -n prs python=3.9
+conda activate mvp
+```
+
 3. Install the required Python packages:  
 ```
 pip install -r prs_requirements.txt
@@ -20,6 +25,7 @@ pip install -r prs_requirements.txt
 
 5. Extract the `PRS_Ubuntu_x.x.x.zip` file into the `unity` folder:  
 ```
+cd unity
 unzip PRS_Ubuntu_0.3.0.zip
 ```   
 Note that the contents after unzipping should be placed in `unity` folder, and give `unity` folder file permissions:  
